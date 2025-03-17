@@ -1,4 +1,7 @@
 site_name: TARDIS Connector
+site_description: TARDIS Connector 2025 Workshop
+repo_url: https://github.com/tardis-sn/connector25
+site_author: TARDIS Connector
 
 theme: 
   name: material
