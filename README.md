@@ -1,3 +1,14 @@
+[![Repo Status][status-badge]][status-link]
+[![Docs Status][docs-badge]][docs-link]
+[![License][license-badge]][license-link]
+
+[status-link]:         https://www.repostatus.org/#active
+[status-badge]:        https://www.repostatus.org/badges/latest/active.svg
+[docs-link]:           https://tardis-sn.github.io/connector25
+[docs-badge]:          https://github.com/tardis-sn/connector25/actions/workflows/mkdocs.yaml/badge.svg
+[license-link]:        https://opensource.org/license/apache-2-0
+[license-badge]:       https://img.shields.io/github/license/tardis-sn/connector25
+
 # connector25
 TARDIS Connector 2025 Workshop
 
