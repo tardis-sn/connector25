@@ -1,1 +1,15 @@
 site_name: TARDIS Connector
+
+theme: 
+  name: material
+
+plugins:
+  - mkdocstrings
+  - mkdocs-jupyter
+
+nav:
+  - Home: index.md
+  - Installation: installation.md
+  - MESA to STIR: mesa_to_stella.md
+  - STIR to STELLA: stir_to_stella.md
+  - STELLA to TARDIS: stella_to_tardis.md
