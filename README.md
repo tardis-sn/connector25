@@ -21,39 +21,41 @@ TARDIS Connector 2025 Workshop
 ## Teams
 
 MESA Stellar Evolution
-📌 Coordinator: EB Farag
-• Mathieu Renzo
-• Aldana Grichener
-• Andrea Antoni
-• Jared Goldberg
-• Matteo Cantiello
+* EB Farag 📌
+* Mathieu Renzo
+* Aldana Grichener
+* Andrea Antoni
+* Jared Goldberg
+* Matteo Cantiello
 
 STIR Explosion
-📌 Coordinator: Sean Couch
-• Brandon Barker
-• Evan O’Connor
-• John Delker
+* Sean Couch 📌
+* Brandon Barker
+* Evan O’Connor
+* John Delker
 
 MESA/STELLA Shock Propagation and Lightcurves
-📌 Coordinator: Jared Goldberg
-• EB Farag
-• Yan-Fei
+* Jared Goldberg 📌
+* EB Farag
+* Yan-Fei
 
 TARDIS Radiative Transfer
-📌 Coordinator: Jing Lu
-• Wolfgang Kerzendorf
-• Anirban Dutta
-• Josh Shields
-• Andrew Fullard
+* Jing Lu 📌
+* Wolfgang Kerzendorf
+* Anirban Dutta
+* Josh Shields
+* [Andrew Fullard](https://github.com/andrewfullard)
 
 Research Software Team
-📌 Coordinator: Andrew Fullard
-• Philip Mocz
+* [Andrew Fullard](https://github.com/andrewfullard) 📌
+* [Philip Mocz](https://github.com/pmocz)
 
 Atomic/Plasma Team
-📌 Coordinator: Chris Fontes
-• Josh Shields
-• Wolfgang Kerzendorf
+* Chris Fontes 📌
+* Josh Shields
+* Wolfgang Kerzendorf
+
+(📌=coordinator)
 
 ## Links
 
