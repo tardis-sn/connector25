@@ -10,6 +10,7 @@
 [license-badge]:       https://img.shields.io/github/license/tardis-sn/connector25
 
 # connector25
+<<<<<<< HEAD
 TARDIS Connector 2025 Project
 
 * Evolve a star
@@ -42,6 +43,12 @@ TARDIS Connector 2025 Project
 * [EB Farag](https://github.com/Debraheem)
 * Yan-Fei Jiang
 
+⚡ [MESA](https://github.com/MESAHub/mesa)/[SNEC](https://stellarcollapse.org/index.php/SNEC.html) Shock Propagation and Lightcurves
+* [Mathieu Renzo](https://github.com/mathren) 📌
+* [Jared Goldberg](https://github.com/aurimontem)
+* [Brandon Barker](https://github.com/astrobarker)
+
+
 🌈 [TARDIS](https://github.com/tardis-sn/tardis) Radiative Transfer
 * [Jing Lu](https://github.com/DeerWhale) 📌
 * [Wolfgang Kerzendorf](https://github.com/wkerzendorf)
@@ -65,3 +72,4 @@ TARDIS Connector 2025 Project
 
 * [TARDIS Connector 2025](https://tardis-sn.github.io/connector25/)
 * [2025 workshop website](https://tardis-sn.github.io/tardis-connector/2025)
+
