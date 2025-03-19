@@ -10,3 +10,4 @@ RUN conda create --file conda-linux-64.lock --name tardis
 # handles conda init and conda activate because of bashrc changes
 RUN conda init && . /root/.bashrc && conda activate tardis
 RUN pip install .
+CMD ["/bin/bash"]
