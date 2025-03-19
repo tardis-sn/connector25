@@ -1,5 +1,7 @@
-# TODO
+# MESA to STELLA conversion
 
-* Describe mesa input and user parameters
-* Describe handing mesa output to stella
+## Outputs from MESA
 
+## Conversion to STELLA
+
+## Inputs to STELLA
