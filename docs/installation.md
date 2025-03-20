@@ -28,7 +28,7 @@ in the same directory as `mesa-24.08.1.zip`.
 
 To run the built container with Docker to check it has built correctly, 
 run `sudo docker run -it mesa-latest`. This will drop you into a bash prompt. 
-MESA is located in `/mesa-24.08.1` and the SDK in `/opt/mesadsk`. 
+MESA is located in `/mesa-24.08.1` and the SDK in `/opt/mesadsk`.
 Run `exit` to end the container. 
 
 To use the container to run the MESA step of the Connector with Docker, you will
