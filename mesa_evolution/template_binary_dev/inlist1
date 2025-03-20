@@ -3,29 +3,24 @@
 read_extra_star_job_inlist(1) = .true.
 extra_star_job_inlist_name(1) = 'inlist_both'
 
+save_model_filename           = 'donor_final.mod'
 
-
-save_model_filename = 'donor_final.mod'
-
-!pgstar_flag = .true.
+!pgstar_flag                  = .true.
 
 / ! end of star_job namelist
 
 &eos
-read_extra_eos_inlist(1) = .true.
-extra_eos_inlist_name(1) = 'inlist_both'
 
-
-
+read_extra_eos_inlist(1)      = .true.
+extra_eos_inlist_name(1)      = 'inlist_both'
 
 / ! end of eos namelist
 
 
 &kap
-read_extra_kap_inlist(1) = .true.
-extra_kap_inlist_name(1) = 'inlist_both'
 
-
+read_extra_kap_inlist(1)      = .true.
+extra_kap_inlist_name(1)      = 'inlist_both'
 
 / ! end of kap namelist
 
@@ -35,32 +30,22 @@ extra_kap_inlist_name(1) = 'inlist_both'
 read_extra_controls_inlist(1) = .true.
 extra_controls_inlist_name(1) = 'inlist_both'
 
-
-! set this to .true. to continue post-C depl with a single star
+! set this to .true. to continue post-C depl
 ! otherwise see stopping condition in inlist_both or run_star_extras.f
-x_logical_ctrl(1) = .true.
+x_logical_ctrl(1)             = .true.
 
-
-log_directory = 'LOGS1'
-
-write_header_frequency = 3
-
-! output
-!max_num_profile_models = 100
-!profile_interval = 1000
-!photo_interval = 500
-
+log_directory                 = 'LOGS1'
 
 / ! end of controls namelist
 
 
 &pgstar
 
-read_extra_pgstar_inlist(1) = .true.
-extra_pgstar_inlist_name(1) = 'inlist_pgstar'
+read_extra_pgstar_inlist(1)   = .true.
+extra_pgstar_inlist_name(1)   = 'inlist_pgstar'
 
-!filenames to avoid overlap with accretor
-HR_file_prefix = 'hr_donor_'
-Grid2_file_prefix = 'donor_'
+! filenames to avoid overlap with accretor: not needed if using pgbinary
+! HR_file_prefix                = 'hr_donor_'
+! Grid2_file_prefix             = 'donor_'
 
 / ! end of pgstar namelist
