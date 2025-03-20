@@ -27,9 +27,6 @@ L_NUC_RATIO_UPPER_LIMIT = (
 )
 ##########################################
 
-STELLA_model_folder = sys.argv[1]
-parse_stella_models_to_tardis_configs(STELLA_model_folder, "TARDIS_example_configs")
-
 
 def parse_stella_models_to_tardis_configs(
     stella_folder_path,
@@ -132,6 +129,15 @@ def parse_stella_models_to_tardis_configs(
         stella_model = read_stella_model(stella_output_files[i])
         df_stella_data = stella_model.data
 
+        # shift the center v to boundary v (TARDIS take inner boundary and center density)
+        v_inner_edge = (
+            df_stella_data["cell_center_v"].values[:-1] + df_stella_data["cell_center_v"].values[1:]
+        ) / 2
+        center_densities = df_stella_data["avg_density"].values[:-1]
+        df_stella_data = df_stella_data.iloc[:-1].reset_index(drop=True)
+        df_stella_data.loc[:, "cell_center_v"] = v_inner_edge
+        df_stella_data.loc[:, "avg_density"] = center_densities
+
         # filter out the optical thick shells
         if tau_upper_limit is not False:
             df_stella_data = df_stella_data[df_stella_data["tau"] <= tau_upper_limit].reset_index(
@@ -224,7 +230,7 @@ def parse_stella_models_to_tardis_configs(
                 "avg_density": "density",
                 "radiation_temperature": "t_rad",
             }
-        )
+        ).reset_index(drop=True)
 
         # get the bolometric luminosity at the chosen day
         L_bol_at_chosen_day = (
@@ -266,3 +272,8 @@ def parse_stella_models_to_tardis_configs(
         write_tardis_csvy(
             tardis_sample_csvy_path, modify_csvy_headers, df_stella_for_tardis, new_csvy_path
         )
+
+
+if __name__ == "__main__":
+    STELLA_model_folder = sys.argv[1]
+    parse_stella_models_to_tardis_configs(STELLA_model_folder, "TARDIS_example_configs")
