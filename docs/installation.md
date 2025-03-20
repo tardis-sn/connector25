@@ -43,7 +43,7 @@ the Connector repository within the container prompt.
 
 ### Run with Docker
 
-Stella is part of the MESA container. 
+STELLA is part of the MESA container. 
 
 # STIR
 
