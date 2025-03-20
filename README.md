@@ -20,6 +20,7 @@ TARDIS-Connector 2025 Project
 
 👉 Check out instructions for obtaining the pipeline on the [project website](https://tardis-sn.github.io/connector25/)!
 
+
 ## Teams
 
 🌟 [MESA](https://github.com/MESAHub/mesa) Stellar Evolution
@@ -58,6 +59,7 @@ TARDIS-Connector 2025 Project
 * [Wolfgang Kerzendorf](https://github.com/wkerzendorf)
 
 (📌=coordinator)
+
 
 ## Links
 
