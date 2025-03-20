@@ -18,9 +18,11 @@ TARDIS-Connector 2025 Project
 * Calculate spectra and light curves
 * (If time allows, compare to observations and realize we’re wrong!)
 
+👉 Check out instructions for obtaining the pipeline on the [project website](https://tardis-sn.github.io/connector25/)!
+
 ## Teams
 
-🌟 MESA Stellar Evolution
+🌟 [MESA](https://github.com/MESAHub/mesa) Stellar Evolution
 * [EB Farag](https://github.com/Debraheem) 📌
 * [Mathieu Renzo](https://github.com/mathren)
 * Aldana Grichener
@@ -34,12 +36,12 @@ TARDIS-Connector 2025 Project
 * [Evan O’Connor](https://github.com/evanoconnor)
 * John Delker
 
-⚡ MESA/STELLA Shock Propagation and Lightcurves
+⚡ [MESA](https://github.com/MESAHub/mesa)/STELLA Shock Propagation and Lightcurves
 * [Jared Goldberg](https://github.com/aurimontem) 📌
 * [EB Farag](https://github.com/Debraheem)
 * Yan-Fei Jiang
 
-🌈 TARDIS Radiative Transfer
+🌈 [TARDIS](https://github.com/tardis-sn/tardis) Radiative Transfer
 * [Jing Lu](https://github.com/DeerWhale) 📌
 * [Wolfgang Kerzendorf](https://github.com/wkerzendorf)
 * Anirban Dutta
@@ -59,4 +61,5 @@ TARDIS-Connector 2025 Project
 
 ## Links
 
+* [TARDIS-Connector 2025](https://tardis-sn.github.io/connector25/)
 * [2025 workshop website](https://tardis-sn.github.io/tardis-connector/2025)
