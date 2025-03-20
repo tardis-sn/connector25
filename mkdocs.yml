@@ -13,6 +13,7 @@ plugins:
 nav:
   - Home: index.md
   - Installation: installation.md
+  - Run the Connector on HPCC: running_on_hpcc.md
   - MESA to STIR: mesa_to_stir.md
   - STIR to STELLA: stir_to_stella.md
   - STELLA to TARDIS: stella_to_tardis.md
