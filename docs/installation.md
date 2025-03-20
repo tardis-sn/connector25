@@ -28,11 +28,14 @@ local copy of the Connector repository.
 
 ### Run with Singularity/Apptainer
 
-To run the built container on an HPCC you will likely need to use Singularity
-or Apptainer (these are basically the same thing as of March 2025). 
+To run the built container on an HPCC you will likely need to use 
+(Singularity)[https://docs.sylabs.io/guides/3.5/user-guide/introduction.html]
+or (Apptainer)[https://apptainer.org/docs/user/latest/] (these are basically 
+the same thing as of March 2025). 
+
 Pull the container from DockerHub using the command 
-`singularity pull docker://mesa-connector`.
-Run the container using `singularity run mesa-connector-latest`. Singularity
+`singularity pull singularity pull docker://CONNECTORUSERNAME/mesa-connector:24.08.1`.
+Run the container using `singularity run mesa-connector_24.08.1.sif`. Singularity
 automatically mounts your home directory, so you can navigate to your clone of 
 the Connector repository within the container prompt.
 
@@ -56,7 +59,8 @@ The release of TARDIS used as part of the Connector is [XXXX](Link to github rel
 
 We also provide a Docker definitions file to allow the production of a 
 containerized version of TARDIS using the version described above. 
-To build the container, [install Docker](https://docs.docker.com/engine/install/) and run the command `sudo docker build -f /path/to/tardis.dockerfile -t tardis-latest .`.
+To build the container, [install Docker](https://docs.docker.com/engine/install/) 
+and run the command `sudo docker build -f /path/to/tardis.dockerfile -t tardis-latest .`.
 
 ### Run with Docker
 
@@ -71,10 +75,13 @@ command `sudo docker run -v /path/to/connector25:/connector25-it  mesa-latest`.
 
 ### Run with Singularity/Apptainer
 
-To run the built container on an HPCC you will likely need to use Singularity
-or Apptainer (these are basically the same thing as of March 2025). 
+To run the built container on an HPCC you will likely need to use 
+(Singularity)[https://docs.sylabs.io/guides/3.5/user-guide/introduction.html]
+or (Apptainer)[https://apptainer.org/docs/user/latest/] (these are basically the 
+same thing as of March 2025). 
+
 Pull the container from DockerHub using the command 
-`singularity pull docker://tardis-connector`.
-Run the container using `singularity run tardis-connector-latest`. Singularity
+`singularity pull docker://CONNECTORUSERNAME/tardis-connector:XXXXXX`.
+Run the container using `singularity run tardis-connector-XXXXXX`. Singularity
 automatically mounts your home directory, so you can navigate to your clone of 
 the Connector repository within the container prompt.
