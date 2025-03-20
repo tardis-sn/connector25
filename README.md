@@ -10,7 +10,7 @@
 [license-badge]:       https://img.shields.io/github/license/tardis-sn/connector25
 
 # connector25
-TARDIS Connector 2025 Workshop
+TARDIS-Connector 2025 Project
 
 * Evolve a star
 * Strip it of its hydrogen
@@ -29,9 +29,9 @@ TARDIS Connector 2025 Workshop
 * [Matteo Cantiello](https://github.com/matteocantiello)
 
 💥 STIR Explosion
-* Sean Couch 📌
-* Brandon Barker
-* Evan O’Connor
+* [Sean Couch](https://github.com/smcouch) 📌
+* [Brandon Barker](https://github.com/astrobarker)
+* [Evan O’Connor](https://github.com/evanoconnor)
 * John Delker
 
 ⚡ MESA/STELLA Shock Propagation and Lightcurves
@@ -40,10 +40,10 @@ TARDIS Connector 2025 Workshop
 * Yan-Fei Jiang
 
 🌈 TARDIS Radiative Transfer
-* Jing Lu 📌
+* [Jing Lu](https://github.com/DeerWhale) 📌
 * [Wolfgang Kerzendorf](https://github.com/wkerzendorf)
 * Anirban Dutta
-* Josh Shields
+* [Josh Shields](https://jvshields.github.io/)
 * [Andrew Fullard](https://github.com/andrewfullard)
 
 💻 Research Software Team
@@ -52,11 +52,11 @@ TARDIS Connector 2025 Workshop
 
 ⚛️ Atomic/Plasma Team
 * Chris Fontes 📌
-* Josh Shields
+* [Josh Shields](https://jvshields.github.io/)
 * [Wolfgang Kerzendorf](https://github.com/wkerzendorf)
 
 (📌=coordinator)
 
 ## Links
 
-[workshop website](https://tardis-sn.github.io/tardis-connector/2025)
+* [2025 workshop website](https://tardis-sn.github.io/tardis-connector/2025)
