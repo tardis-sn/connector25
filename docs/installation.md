@@ -47,6 +47,32 @@ Stella is part of the MESA container.
 
 # STIR
 
+STIR is only provided using our pre-built container.
+
+## Run with Docker
+
+Pull the container from DockerHub using the command 
+`docker pull CONNECTORUSERNAME/stir-connector:XXXXXXX`.
+
+To use the container to run the STIR step of the Connector with Docker, you will
+need to bind your copy of the Connector repository to the container. Run the
+command `sudo docker run -v /path/to/connector25:/connector25-it  stir-latest`. 
+Now the path `/connector25` within the container prompt will have access to your 
+local copy of the Connector repository.
+
+## Run with Singularity/Apptainer
+
+To run the built container on an HPCC you will likely need to use 
+(Singularity)[https://docs.sylabs.io/guides/3.5/user-guide/introduction.html]
+or (Apptainer)[https://apptainer.org/docs/user/latest/] (these are basically the 
+same thing as of March 2025). 
+
+Pull the container from DockerHub using the command 
+`singularity pull docker://CONNECTORUSERNAME/stir-connector:XXXXXX`.
+Run the container using `singularity run stir-connector-XXXXXX`. Singularity
+automatically mounts your home directory, so you can navigate to your clone of 
+the Connector repository within the container prompt.
+
 # TARDIS
 
 Standard installation of TARDIS can be accomplished using our locked environment
