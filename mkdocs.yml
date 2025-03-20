@@ -5,10 +5,13 @@ site_author: TARDIS Connector
 
 theme: 
   name: material
+  logo: assets/tardis-logo-2.svg
+  favicon: assets/tardis-logo-2.svg
 
 plugins:
   - mkdocstrings
   - mkdocs-jupyter
+  - search
 
 nav:
   - Home: index.md
@@ -16,3 +19,5 @@ nav:
   - MESA to STIR: mesa_to_stir.md
   - STIR to STELLA: stir_to_stella.md
   - STELLA to TARDIS: stella_to_tardis.md
+
+copyright: Copyright &copy; 2025 TARDIS Connector
