@@ -13,6 +13,6 @@ plugins:
 nav:
   - Home: index.md
   - Installation: installation.md
-  - MESA to STIR: mesa_to_stella.md
+  - MESA to STIR: mesa_to_stir.md
   - STIR to STELLA: stir_to_stella.md
   - STELLA to TARDIS: stella_to_tardis.md
