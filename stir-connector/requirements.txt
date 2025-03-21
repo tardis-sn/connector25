@@ -2,5 +2,7 @@ matplotlib
 numpy
 pandas
 h5py
-yaml
+pyyaml
 yt
+jupyter
+scipy
