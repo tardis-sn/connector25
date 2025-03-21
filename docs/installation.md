@@ -15,14 +15,9 @@ Download from our Zenodo repository at XXXXXXXXXXXXXXXXXX
 
 ## MESA container
 
-### Build
-
-We also provide a Docker definitions file to allow the production of a 
-containerized version of MESA using the versions described above. 
-To build the container, [install Docker](https://docs.docker.com/engine/install/).
-Then download the zip for MESA version [24.08.1](https://zenodo.org/records/13353788) 
-and run the command `sudo docker build -f /path/to/mesa.dockerfile -t mesa-latest .` 
-in the same directory as `mesa-24.08.1.zip`.
+MESA is also provided through a pre-built container.
+It can be obtained from DockerHub using the command:
+`docker pull CONNECTORUSERNAME/mesa-connector:XXXXXX`
 
 ### Run with Docker
 
@@ -49,6 +44,16 @@ Pull the container from DockerHub using the command
 Run the container using `singularity run mesa-connector_24.08.1.sif`. Singularity
 automatically mounts your home directory, so you can navigate to your clone of 
 the Connector repository within the container prompt.
+
+### Build
+
+This is not needed for users of the pipeline.
+We also provide a Docker definitions file to allow the production of a 
+containerized version of MESA using the versions described above. 
+To build the container, [install Docker](https://docs.docker.com/engine/install/).
+Then download the zip for MESA version [24.08.1](https://zenodo.org/records/13353788) 
+and run the command `sudo docker build -f /path/to/mesa.dockerfile -t mesa-latest .` 
+in the same directory as `mesa-24.08.1.zip`.
 
 ## STELLA container
 
