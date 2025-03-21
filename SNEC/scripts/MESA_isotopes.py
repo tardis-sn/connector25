@@ -287,10 +287,7 @@ for i in range(
             isotope in columnNames
         ):  # skip the isotopes MESA doesn't trace (as far as MESA is concerned, they are just not there)
             ind = int(columnNames.index(isotope))
-            # set to 1e-40 isotopes that are at zero in the model (e.g., H in stripped progenitors!)
-            cleaned_iso = arr[:, ind]
-            cleaned_iso[cleaned_iso == 0] = 1e-40
-            groupMassfracs.append(cleaned_iso)  # at the end of the loop groupMassfracs
+            groupMassfracs.append(arr[:, ind])  # at the end of the loop groupMassfracs
             # is a matrix: every line is an isotope, every column a zone
         groupArr = np.array(groupMassfracs)  # cast it into numbers
         TgroupArr = (
@@ -328,7 +325,7 @@ for i in range(zones, 0, -1):
         arr[i - 1, ineut]
     )  # abundance of neutrons as MESA gives it
     writeNewLine += "%15.6E" % (
-        arr[i - 1, iprot]
+        max(1e-40, arr[i - 1, iprot]) # floor H to small value for stripped stars
     )  # abundance of h1 (no protons from photodisintegration)
 
     for newIso in massfracsShort:
