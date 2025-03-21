@@ -22,7 +22,7 @@ nav:
     - MESA → STIR: mesa_to_stir.md
     - STIR → STELLA: stir_to_stella.md
     - STELLA → TARDIS: stella_to_tardis.md
-    - STIR → SNEC: stir_to_SNEC.md
+    - STIR → SNEC: stir_to_snec.md
     - SNEC → TARDIS: snec_to_tardis.md
 
 copyright: Copyright &copy; 2025 TARDIS Connector
