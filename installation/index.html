@@ -549,9 +549,32 @@ in the same directory as <code>mesa-24.08.1.zip</code>.</p>
 <h2 id="stella-container">STELLA container</h2>
 <h3 id="run-with-docker_1">Run with Docker</h3>
 <p>STELLA is part of the MESA container. </p>
+<h1 id="snec-container">SNEC container</h1>
+<h2 id="build_1">Build</h2>
+<p>We provide a Docker definitions file to allow the production of a 
+containerized version of <a href="https://stellarcollapse.org/index.php/SNEC.html">SNEC</a> 
+using version 1.01. To build the container, <a href="https://docs.docker.com/engine/install/">install Docker</a> 
+and run the command <code>sudo docker build -f /path/to/snec.dockerfile -t snec .</code>.</p>
+<h2 id="run-with-docker_2">Run with Docker</h2>
+<p>To run the built container with Docker to check it has built correctly, 
+run <code>sudo docker run -it snec</code>. This will drop you into a bash prompt in the
+SNEC directory. Run <code>exit</code> to end the container.</p>
+<p>To use the container to run the SNEC step of the Connector with Docker, you will
+need to bind your copy of the Connector repository to the container. Run the
+command <code>sudo docker run -v /path/to/connector25:/connector25-it snec</code>.</p>
+<h2 id="run-with-singularityapptainer_1">Run with Singularity/Apptainer</h2>
+<p>To run the built container on an HPCC you will likely need to use 
+(Singularity)[https://docs.sylabs.io/guides/3.5/user-guide/introduction.html]
+or (Apptainer)[https://apptainer.org/docs/user/latest/] (these are basically the 
+same thing as of March 2025). </p>
+<p>Pull the container from DockerHub using the command 
+<code>singularity pull docker://CONNECTORUSERNAME/snec:XXXXXX</code>.
+Run the container using <code>singularity run snec-XXXXXX</code>. Singularity
+automatically mounts your home directory, so you can navigate to your clone of 
+the Connector repository within the container prompt.</p>
 <h1 id="stir">STIR</h1>
 <p>STIR is only provided using our pre-built container.</p>
-<h2 id="run-with-docker_2">Run with Docker</h2>
+<h2 id="run-with-docker_3">Run with Docker</h2>
 <p>Pull the container from DockerHub using the command 
 <code>docker pull CONNECTORUSERNAME/stir-connector:XXXXXXX</code>.</p>
 <p>To use the container to run the STIR step of the Connector with Docker, you will
@@ -559,7 +582,7 @@ need to bind your copy of the Connector repository to the container. Run the
 command <code>sudo docker run -v /path/to/connector25:/connector25-it  stir-latest</code>. 
 Now the path <code>/connector25</code> within the container prompt will have access to your 
 local copy of the Connector repository.</p>
-<h2 id="run-with-singularityapptainer_1">Run with Singularity/Apptainer</h2>
+<h2 id="run-with-singularityapptainer_2">Run with Singularity/Apptainer</h2>
 <p>To run the built container on an HPCC you will likely need to use 
 (Singularity)[https://docs.sylabs.io/guides/3.5/user-guide/introduction.html]
 or (Apptainer)[https://apptainer.org/docs/user/latest/] (these are basically the 
@@ -574,19 +597,19 @@ the Connector repository within the container prompt.</p>
 file, with instructions <a href="https://tardis-sn.github.io/tardis/installation.html">here</a>. 
 The release of TARDIS used as part of the Connector is <a href="Link to github release">XXXX</a>.</p>
 <h2 id="tardis-container">TARDIS container</h2>
-<h3 id="build_1">Build</h3>
+<h3 id="build_2">Build</h3>
 <p>We also provide a Docker definitions file to allow the production of a 
 containerized version of TARDIS using the version described above. 
 To build the container, <a href="https://docs.docker.com/engine/install/">install Docker</a> 
-and run the command <code>sudo docker build -f /path/to/tardis.dockerfile -t tardis-latest .</code>.</p>
-<h3 id="run-with-docker_3">Run with Docker</h3>
+and run the command <code>sudo docker build -f /path/to/tardis.dockerfile -t tardis .</code>.</p>
+<h3 id="run-with-docker_4">Run with Docker</h3>
 <p>To run the built container with Docker to check it has built correctly, 
-run <code>sudo docker run -it tardis-latest</code>. This will drop you into a bash prompt. 
+run <code>sudo docker run -it tardis</code>. This will drop you into a bash prompt. 
 TARDIS is located in <code>/tardis-release-XXXX</code>. Run <code>exit</code> to end the container.</p>
 <p>To use the container to run the TARDIS step of the Connector with Docker, you will
 need to bind your copy of the Connector repository to the container. Run the
-command <code>sudo docker run -v /path/to/connector25:/connector25-it  mesa-latest</code>.</p>
-<h3 id="run-with-singularityapptainer_2">Run with Singularity/Apptainer</h3>
+command <code>sudo docker run -v /path/to/connector25:/connector25-it  tardis</code>.</p>
+<h3 id="run-with-singularityapptainer_3">Run with Singularity/Apptainer</h3>
 <p>To run the built container on an HPCC you will likely need to use 
 (Singularity)[https://docs.sylabs.io/guides/3.5/user-guide/introduction.html]
 or (Apptainer)[https://apptainer.org/docs/user/latest/] (these are basically the 
