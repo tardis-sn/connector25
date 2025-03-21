@@ -7,7 +7,7 @@ To carry out a MESA simulation locally on your laptop, compile with `./mk` and r
 
 ## Outputs from MESA
 
-MESA outputs history and profile data in the `LOGS` directory in your `work` folder, photos for restarting the simulation, and images (optional).
+MESA outputs include history and profile data (will appear in the `LOGS` directory in your `work` folder), photos for restarting the simulation, and images (optional). We include output files for our fiducial mesa methods. You should be able to reproduce this output by running the inlists as they appear in the inputs section. 
 
 ## Inputs to STIR
 
