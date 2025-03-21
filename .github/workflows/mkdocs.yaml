@@ -25,6 +25,7 @@ jobs:
           pip install mkdocs-material
           pip install mkdocstrings-python
           pip install mkdocs-jupyter
+          pip install mkdocs-mermaid2-plugin
 
       - name: Deploy
         run: |
