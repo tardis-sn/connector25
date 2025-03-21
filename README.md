@@ -12,8 +12,8 @@
 # connector25
 TARDIS Connector 2025 Project
 
-* Evolve a star
-* Strip it of its hydrogen
+* Evolve a (binary) star
+* (Strip it of its hydrogen)
 * Blow it up
 * Calculate spectra and light curves
 * (If time allows, compare to observations and realize we’re wrong!)
@@ -25,10 +25,10 @@ TARDIS Connector 2025 Project
 
 🌟 [MESA](https://github.com/MESAHub/mesa) Stellar Evolution
 * [EB Farag](https://github.com/Debraheem) 📌
-* [Mathieu Renzo](https://github.com/mathren)
-* Aldana Grichener
+* [Aldana Grichener](https://github.com/AldanaGrichener)
 * Andrea Antoni
 * [Jared Goldberg](https://github.com/aurimontem)
+* [Mathieu Renzo](https://github.com/mathren)
 * [Matteo Cantiello](https://github.com/matteocantiello)
 
 💥 STIR Explosion
@@ -41,6 +41,12 @@ TARDIS Connector 2025 Project
 * [Jared Goldberg](https://github.com/aurimontem) 📌
 * [EB Farag](https://github.com/Debraheem)
 * Yan-Fei Jiang
+
+⚡ [MESA](https://github.com/MESAHub/mesa)/[SNEC](https://stellarcollapse.org/index.php/SNEC.html) Shock Propagation and Lightcurves alternative
+* [Mathieu Renzo](https://github.com/mathren) 📌
+* [Brandon Barker](https://github.com/astrobarker)
+* [Jared Goldberg](https://github.com/aurimontem)
+
 
 🌈 [TARDIS](https://github.com/tardis-sn/tardis) Radiative Transfer
 * [Jing Lu](https://github.com/DeerWhale) 📌
