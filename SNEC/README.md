@@ -3,7 +3,7 @@
 
 [SNEC](https://stellarcollapse.org/index.php/SNEC.html) takes a stellar model as input. The input profile needs to have
 the columns `zone`, `logRho`, `logT`, `velocity`, `ye`, `radius`, `mass`, the mass
-fractions of all isotopes included, and optionally `omega`.
+fractions of all isotopes included, `mixing_type`, and optionally `omega`.
 
 
 ## Generating the input models
@@ -15,7 +15,7 @@ The script `mesa_to_GR1D.py` takes a `MESA` profile and converts it to a
 path of the input profile and output file (including filenames) are
 command line arguments for this script.
 
-The script `MESA-isotopes.py` script will generate from the input `MESA`
+The script `MESA_isotopes.py` script will generate from the input `MESA`
 profile the file for the composition input of `SNEC`. Once again the
 paths of the input and output files (including filenames) are command
 line arguments. For untested nuclear networks, the script may need
@@ -37,7 +37,7 @@ number of mesh points in the `MESA` profile and it produces a file that
 filename).
 
 
-## The `SNEC` parameter and grid files
+## The `SNEC` parameter file
 
 An example `parameters` file for `SNEC` is in `./input`. Please refer to the
 [SNEC documentation (pdf)](https://stellarcollapse.org/codes/snec_notes-1.00.pdf) for a complete description.
