@@ -21,7 +21,8 @@ SKIP_NONHOMOLOGOUS_MODELS = (
 )
 MAX_NONHOMOLOGOUS_SHELLS = 5  # int, if active if SKIP_NONHOMOLOGOUS_MODELS is True, the maximum number of non-homologous shells to skip
 TAU_UPPER_LIMIT = 1e3  # False or float, filter out the shells that has tau larger than this value
-SHRINK_SHELL_NUMBER = False  # False or int, if int then truncate the shell number to this value by skipping even number of shells in between
+TAU_LOWER_LIMIT = False  # False or float, filter out the shells that has tau larger than this value
+SHRINK_SHELL_NUMBER = False  # False or int, if int then end up with this int as total shell numbers that keep the velocity range but lower the grid resolution
 L_NUC_RATIO_UPPER_LIMIT = (
     0.8  # default 0.8, criteria to determine if the photosphere holds, means L_nuc/L_bol <= 0.8
 )
@@ -36,6 +37,7 @@ def parse_stella_models_to_tardis_configs(
     skip_nonhomologous_models=SKIP_NONHOMOLOGOUS_MODELS,
     max_nonhomologous_shells=MAX_NONHOMOLOGOUS_SHELLS,
     tau_upper_limit=TAU_UPPER_LIMIT,
+    tau_lower_limit=TAU_LOWER_LIMIT,
     shrink_shell_number=SHRINK_SHELL_NUMBER,
     l_nuc_ratio_upper_limit=L_NUC_RATIO_UPPER_LIMIT,
 ):
@@ -146,6 +148,11 @@ def parse_stella_models_to_tardis_configs(
             df_stella_data = df_stella_data[df_stella_data["tau"] <= tau_upper_limit].reset_index(
                 drop=True
             )
+        # filter out the optical TOO think shells
+        if tau_lower_limit is not False:
+            df_stella_data = df_stella_data[df_stella_data["tau"] >= tau_lower_limit].reset_index(
+                drop=True
+            )
 
         # check if the model is homologous
         if skip_nonhomologous_models is not False:
@@ -163,8 +170,10 @@ def parse_stella_models_to_tardis_configs(
 
         # check if the user want to shrink the shell number
         if shrink_shell_number is not False:
-            skip_shells = int(df_stella_data.shape[0] / shrink_shell_number)
-            df_stella_data = df_stella_data.iloc[::skip_shells].reset_index(drop=True)
+            no_group_shells = int(df_stella_data.shape[0] / shrink_shell_number)
+            df_stella_data = df_stella_data.groupby(
+                np.arange(len(df_stella_data)) // no_group_shells
+            ).mean()
 
         # filter out the columns that are not needed for TARDIS
         matter_columns = ["cell_center_v", "avg_density", "radiation_temperature"]
@@ -244,7 +253,7 @@ def parse_stella_models_to_tardis_configs(
         )
 
         # extract the time of the data relative to SBO
-        day_since_SBO = df_bol["time"].min() + stella_model.metadata["t_max"].value
+        day_since_SBO = stella_model.metadata["t_max"].value - df_bol["time"].min()
 
         # roughly estimate the photosphere index using tau = 2/3 for initial T_inner
         ph_idx = df_stella_data.index[df_stella_data["tau"].sub(1).abs().idxmin()]
@@ -281,6 +290,7 @@ def parse_stella_models_to_tardis_configs(
         write_tardis_csvy(
             tardis_sample_csvy_path, modify_csvy_headers, df_stella_for_tardis, new_csvy_path
         )
+        print(f"Day {day_str} model converted to TARDIS config and csvy format")
 
 
 if __name__ == "__main__":
