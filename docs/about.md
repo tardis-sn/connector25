@@ -18,4 +18,4 @@
 * Jing Lu
 * Evan O’Connor
 * Mathieu Renzo
-* Josh Shields
+* [Josh Shields](https://jvshields.github.io/)
