@@ -13,7 +13,6 @@
  Modified by Mathieu Renzo 20250321 to make imax an input
 """
 
-from __future__ import division
 import sys
 
 def make_SNEC_grid(output_file: str):

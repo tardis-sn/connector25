@@ -287,7 +287,8 @@ for i in range(
             isotope in columnNames
         ):  # skip the isotopes MESA doesn't trace (as far as MESA is concerned, they are just not there)
             ind = int(columnNames.index(isotope))
-            groupMassfracs.append(arr[:, ind])  # at the end of the loop groupMassfracs
+            # set to 1e-40 isotopes that are at zero in the model (e.g., H in stripped progenitors!)
+            groupMassfracs.append(max(1e-40, arr[:, ind]))  # at the end of the loop groupMassfracs
             # is a matrix: every line is an isotope, every column a zone
         groupArr = np.array(groupMassfracs)  # cast it into numbers
         TgroupArr = (
