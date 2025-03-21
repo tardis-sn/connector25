@@ -89,8 +89,13 @@ def plot_bolometric_LC(
         header=None,
         names=["time", "logL_bol", "logL_nuc"],
     )
+    df_bol_with_uBVri = pd.read_csv(
+        f"{STELLA_model_folder}/res/mesa.lbol",
+        sep=r"\s+",
+    )
     if ax is None:
-        fig, ax = plt.subplots(1, 1, figsize=(8, 6))
+        fig, axes = plt.subplots(2, 1, figsize=(8, 12))
+        ax = axes[0]
 
     if L_NUC_RATIO_UPPER_LIMIT is not None:
         df_bol["L_nuc_ratio"] = 10 ** (df_bol["logL_nuc"] - df_bol["logL_bol"])
@@ -102,7 +107,7 @@ def plot_bolometric_LC(
 
     # mark the time have stella turned tardis configs
     if tardis_config_folder is not None:
-        tardis_csvy_files = (glob.glob(f"{tardis_config_folder}/*.csvy"))
+        tardis_csvy_files = glob.glob(f"{tardis_config_folder}/*.csvy")
         days_tardis = [
             float(csvy_file.split("/")[-1].split("_")[1]) for csvy_file in tardis_csvy_files
         ]
@@ -113,6 +118,17 @@ def plot_bolometric_LC(
     # plot the bolometric luminosity
     ax.plot(df_bol["time"], df_bol["logL_bol"], label="logL_bol")
     ax.plot(df_bol["time"], df_bol["logL_nuc"], label="logL_nuc")
+    ax.plot(df_bol_with_uBVri["time"], df_bol_with_uBVri["L_ubvri"], label="logL_UBVRI")
+
+    axes[1].plot(df_bol["time"], df_bol["L_nuc_ratio"], label="L_nuc/L_bol")
+    axes[1].plot(
+        df_bol_with_uBVri["time"],
+        10 ** (df_bol_with_uBVri["L_ubvri"] - df_bol_with_uBVri["L_bol"]),
+        label="L_UBVRI/L_bol",
+    )
+    axes[1].legend(fontsize=16)
+    axes[1].grid(alpha=0.5)
+    axes[1].set_ylim(-1, 1.2)
 
     ax.legend(fontsize=16)
     ax.grid(alpha=0.5)
