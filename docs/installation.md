@@ -146,7 +146,6 @@ To use the container to run the TARDIS step of the Connector with Docker, you wi
 need to bind your copy of the Connector repository to the container. Run the
 command `sudo docker run -v /path/to/connector25:/connector25-it  tardis`.
 
-
 ### Run with Singularity/Apptainer
 
 To run the built container on an HPCC you will likely need to use 

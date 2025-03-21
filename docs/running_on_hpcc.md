@@ -2,7 +2,7 @@
 
 Follow the instructions in the [installation guide](installation.md), checking
 that the containers run using the Singularity or Apptainer system on your HPCC.
-Make sure you login using X-Window forwarding.
+Make sure you login using X-Window forwarding (e.g., `ssh -X username@hpcc.example.com`).
 
 ## MESA
 

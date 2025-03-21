@@ -2,7 +2,7 @@
 
 ## Inputs to MESA
 
-MESA input consists of a `work` directory which includes project `inlists` (user configuration files), a `run_star_extras/` forlder for custom Fortran functions that hook into the MESA stellar evolution solve, and make/run/restart bash scripts.
+MESA input consists of a `work` directory which includes project `inlists` (user configuration files), a `run_star_extras/` folder for custom Fortran functions that hook into the MESA stellar evolution solve, and make/run/restart bash scripts.
 To carry out a MESA simulation locally on your laptop, compile with `./mk` and run with `./rn`.
 
 ## Outputs from MESA
