@@ -7,6 +7,8 @@ theme:
   name: material
   logo: assets/tardis-logo-2.svg
   favicon: assets/tardis-logo-2.svg
+  features:
+    - navigation.expand
 
 plugins:
   - mkdocstrings
@@ -24,5 +26,6 @@ nav:
     - STELLA → TARDIS: stella_to_tardis.md
     - STIR → SNEC: stir_to_snec.md
     - SNEC → TARDIS: snec_to_tardis.md
+  - ℹ️ About: about.md
 
 copyright: Copyright &copy; 2025 TARDIS Connector
