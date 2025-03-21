@@ -116,7 +116,7 @@ def get_fields_names(column_names):
                 }
             )
         else:
-            print(f"{element} is not valid nuiclide in tardis database.")
+            print(f"{element} is not valid nuclide in tardis database.")
 
     return fields
 

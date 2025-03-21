@@ -29,7 +29,7 @@ def plot_profile_data(
         # stripp the days from the csvy files
         days_str = [csvy_file.split("/")[-1].split("_")[1] for csvy_file in tardis_csvy_files]
     else:
-        profile_files = glob.glob(f"{stella_model_path}/res/mesa.day*")
+        profile_files = sorted(glob.glob(f"{stella_model_path}/res/mesa.day*"))
         days_str = [file.split("/")[-1].split("_")[0].split("day")[1] for file in profile_files]
 
     # generate a color set for each day
