@@ -469,17 +469,13 @@ location.</p>
 <h1 id="mesa">MESA</h1>
 <p><a href="https://mesastar.org/">MESA</a> is a versatile open-source 1D stellar evolution code. For the Connector 25 project, we <a href="https://docs.mesastar.org/en/latest/installation.html">install</a> MESA version <a href="https://zenodo.org/records/13353788">24.08.1</a> and MESA SDK version <a href="http://user.astro.wisc.edu/~townsend/static.php?ref=mesasdk">24.7.1/24.10.1/25.3.1 (Linux (Intel/AMD) / Mac OS (Intel) / Mac OS (ARM))</a> for bit-for-bit reproducibility.</p>
 <h2 id="mesa-container">MESA container</h2>
-<h3 id="build">Build</h3>
-<p>We also provide a Docker definitions file to allow the production of a 
-containerized version of MESA using the versions described above. 
-To build the container, <a href="https://docs.docker.com/engine/install/">install Docker</a>.
-Then download the zip for MESA version <a href="https://zenodo.org/records/13353788">24.08.1</a> 
-and run the command <code>sudo docker build -f /path/to/mesa.dockerfile -t mesa-latest .</code> 
-in the same directory as <code>mesa-24.08.1.zip</code>.</p>
+<p>MESA is also provided through a pre-built container.
+It can be obtained from DockerHub using the command:
+<code>docker pull CONNECTORUSERNAME/mesa-connector:XXXXXX</code></p>
 <h3 id="run-with-docker">Run with Docker</h3>
 <p>To run the built container with Docker to check it has built correctly, 
 run <code>sudo docker run -it mesa-latest</code>. This will drop you into a bash prompt. 
-MESA is located in <code>/mesa-24.08.1</code> and the SDK in <code>/opt/mesadsk</code>. 
+MESA is located in <code>/mesa-24.08.1</code> and the SDK in <code>/opt/mesadsk</code>.
 Run <code>exit</code> to end the container. </p>
 <p>To use the container to run the MESA step of the Connector with Docker, you will
 need to bind your copy of the Connector repository to the container. Run the
@@ -496,6 +492,14 @@ the same thing as of March 2025). </p>
 Run the container using <code>singularity run mesa-connector_24.08.1.sif</code>. Singularity
 automatically mounts your home directory, so you can navigate to your clone of 
 the Connector repository within the container prompt.</p>
+<h3 id="build">Build</h3>
+<p>This is not needed for users of the pipeline.
+We also provide a Docker definitions file to allow the production of a 
+containerized version of MESA using the versions described above. 
+To build the container, <a href="https://docs.docker.com/engine/install/">install Docker</a>.
+Then download the zip for MESA version <a href="https://zenodo.org/records/13353788">24.08.1</a> 
+and run the command <code>sudo docker build -f /path/to/mesa.dockerfile -t mesa-latest .</code> 
+in the same directory as <code>mesa-24.08.1.zip</code>.</p>
 <h2 id="stella-container">STELLA container</h2>
 <h3 id="run-with-docker_1">Run with Docker</h3>
 <p>STELLA is part of the MESA container. </p>
