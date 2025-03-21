@@ -14,7 +14,6 @@
 """
 
 from __future__ import division
-import math
 import sys
 
 def make_SNEC_grid(output_file: str):

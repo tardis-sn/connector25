@@ -1,15 +1,7 @@
 #!/usr/bin/env python
 
-import os
-import array
-import math
 import sys
-import pylab as pl
-import matplotlib.pyplot as plt
-from matplotlib import cm
-import matplotlib.figure as fig
 import numpy as np
-import scipy as sp
 
 path = sys.argv[1]  # first argument is the path of the MESA profile we want to convert
 pathout = sys.argv[2] # second argument is the path where to save the output (must include the extension)
