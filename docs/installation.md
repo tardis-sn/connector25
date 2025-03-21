@@ -56,6 +56,38 @@ the Connector repository within the container prompt.
 
 STELLA is part of the MESA container. 
 
+# SNEC container
+
+## Build
+
+We provide a Docker definitions file to allow the production of a 
+containerized version of [SNEC](https://stellarcollapse.org/index.php/SNEC.html) 
+using version 1.01. To build the container, [install Docker](https://docs.docker.com/engine/install/) 
+and run the command `sudo docker build -f /path/to/snec.dockerfile -t snec .`.
+
+## Run with Docker
+
+To run the built container with Docker to check it has built correctly, 
+run `sudo docker run -it snec`. This will drop you into a bash prompt in the
+SNEC directory. Run `exit` to end the container.
+
+To use the container to run the SNEC step of the Connector with Docker, you will
+need to bind your copy of the Connector repository to the container. Run the
+command `sudo docker run -v /path/to/connector25:/connector25-it snec`.
+
+## Run with Singularity/Apptainer
+
+To run the built container on an HPCC you will likely need to use 
+(Singularity)[https://docs.sylabs.io/guides/3.5/user-guide/introduction.html]
+or (Apptainer)[https://apptainer.org/docs/user/latest/] (these are basically the 
+same thing as of March 2025). 
+
+Pull the container from DockerHub using the command 
+`singularity pull docker://CONNECTORUSERNAME/snec:XXXXXX`.
+Run the container using `singularity run snec-XXXXXX`. Singularity
+automatically mounts your home directory, so you can navigate to your clone of 
+the Connector repository within the container prompt.
+
 # STIR
 
 STIR is only provided using our pre-built container.
@@ -97,17 +129,17 @@ The release of TARDIS used as part of the Connector is [XXXX](Link to github rel
 We also provide a Docker definitions file to allow the production of a 
 containerized version of TARDIS using the version described above. 
 To build the container, [install Docker](https://docs.docker.com/engine/install/) 
-and run the command `sudo docker build -f /path/to/tardis.dockerfile -t tardis-latest .`.
+and run the command `sudo docker build -f /path/to/tardis.dockerfile -t tardis .`.
 
 ### Run with Docker
 
 To run the built container with Docker to check it has built correctly, 
-run `sudo docker run -it tardis-latest`. This will drop you into a bash prompt. 
+run `sudo docker run -it tardis`. This will drop you into a bash prompt. 
 TARDIS is located in `/tardis-release-XXXX`. Run `exit` to end the container.
 
 To use the container to run the TARDIS step of the Connector with Docker, you will
 need to bind your copy of the Connector repository to the container. Run the
-command `sudo docker run -v /path/to/connector25:/connector25-it  mesa-latest`.
+command `sudo docker run -v /path/to/connector25:/connector25-it  tardis`.
 
 
 ### Run with Singularity/Apptainer
