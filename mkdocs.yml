@@ -1,0 +1,31 @@
+site_name: TARDIS Connector
+site_description: TARDIS Connector 2025 Workshop
+repo_url: https://github.com/tardis-sn/connector25
+site_author: TARDIS Connector
+
+theme: 
+  name: material
+  logo: assets/tardis-logo-2.svg
+  favicon: assets/tardis-logo-2.svg
+  features:
+    - navigation.expand
+
+plugins:
+  - mkdocstrings
+  - mkdocs-jupyter
+  - search
+  - mermaid2
+
+nav:
+  - 🏠 Home: index.md
+  - 🔧 Installation: installation.md
+  - 🖥️ Run the Connector on HPCC: running_on_hpcc.md
+  - 🏗️ The Connector Pipeline:
+    - MESA → STIR: mesa_to_stir.md
+    - STIR → STELLA: stir_to_stella.md
+    - STELLA → TARDIS: stella_to_tardis.md
+    - STIR → SNEC: stir_to_snec.md
+    - SNEC → TARDIS: snec_to_tardis.md
+  - ℹ️ About: about.md
+
+copyright: Copyright &copy; 2025 TARDIS Connector
