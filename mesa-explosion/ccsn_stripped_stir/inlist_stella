@@ -1,0 +1,14 @@
+&stella
+save_stella_data_when_terminate = .true.
+save_stella_data_filename = 'mesa'
+stella_num_points = 400
+stella_nz_extra = 0 !10
+stella_min_surf_logRho = -7 !100 !-7 !-100
+stella_min_velocity = 1d6 !0 !0
+stella_skip_inner_dm = 0.001 !0.001 !1 ! 0.1 is very aggressive !1d-4 !0d0
+stella_skip_inner_v_limit = 5d+07 ! 500 km/s 
+stella_mdot_years_for_wind = 0.1
+stella_mdot_for_wind = 1d-5
+stella_v_wind = 10
+stella_show_headers = .false.
+/ ! end of stella namelist
