@@ -33,7 +33,7 @@ typically is *not* the same as the `MESA` input profile grid. This can be
 done with the script `./script/grid_setup.py` which is a modified
 version of the script that is part of `SNEC`. It takes as input only the
 number of mesh points in the `MESA` profile and it produces a file that
-**needs** to be in `SNEC-1.01/table/sGridPattern.dat` (with this specific
+**needs** to be in `SNEC-1.01/tables/GridPattern.dat` (with this specific
 filename).
 
 

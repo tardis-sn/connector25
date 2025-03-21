@@ -55,4 +55,4 @@ def make_SNEC_grid(output_file: str):
 
 
 if __name__ == "__main__":
-    make_SNEC_grid("SNEC-1.01/table/sGridPattern.dat")
+    make_SNEC_grid(sys.argv[2])
