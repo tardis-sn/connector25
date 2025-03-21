@@ -1,4 +1,4 @@
-# Connector
+# Installation
 
 ## Configuration files
 
