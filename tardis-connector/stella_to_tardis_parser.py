@@ -85,7 +85,7 @@ def parse_stella_models_to_tardis_configs(
 
     # check if the tardis examples files exsits
     tardis_sample_config_path = (
-        f"{tardis_example_config_folder_path}/tardis_example_config_SESN.yml"
+        f"{tardis_example_config_folder_path}/tardis_template_config_SESN.yml"
     )
     tardis_sample_csvy_path = f"{tardis_example_config_folder_path}/tardis_example_csvy.csvy"
     if not Path(tardis_sample_config_path).exists():
@@ -295,4 +295,4 @@ def parse_stella_models_to_tardis_configs(
 
 if __name__ == "__main__":
     STELLA_model_folder = sys.argv[1]
-    parse_stella_models_to_tardis_configs(STELLA_model_folder, "TARDIS_example_configs")
+    parse_stella_models_to_tardis_configs(STELLA_model_folder, "TARDIS_template_configs")
