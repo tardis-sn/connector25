@@ -545,7 +545,7 @@
 <h1 id="running-the-connector-on-slurm-hpcc">Running the Connector on SLURM HPCC</h1>
 <p>Follow the instructions in the <a href="../installation/">installation guide</a>, checking
 that the containers run using the Singularity or Apptainer system on your HPCC.
-Make sure you login using X-Window forwarding.</p>
+Make sure you login using X-Window forwarding (e.g., <code>ssh -X username@hpcc.example.com</code>).</p>
 <h2 id="mesa">MESA</h2>
 <p><code>salloc -n 16 -t 8:00:00 --x11</code> will request 16 CPUs for 8 hours including an
 X11 binding so you can inspect the simulation as it runs. Once your job launches,
