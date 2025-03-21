@@ -12,6 +12,7 @@ plugins:
   - mkdocstrings
   - mkdocs-jupyter
   - search
+  - mermaid2
 
 nav:
   - 🏠 Home: index.md
