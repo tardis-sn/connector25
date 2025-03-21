@@ -41,5 +41,5 @@ flowchart TD
     style STELLA fill:#00b948,color:#fff
     style SNEC fill:#db6e0d,color:#fff
     style TARDIS fill:#000,color:#fff
-    classDef empty width:1px,height:0px;
+    classDef empty width:1px,height:1px;
 ```
