@@ -10,7 +10,7 @@
 [license-badge]:       https://img.shields.io/github/license/tardis-sn/connector25
 
 # connector25
-TARDIS-Connector 2025 Project
+TARDIS Connector 2025 Project
 
 * Evolve a star
 * Strip it of its hydrogen
@@ -63,5 +63,5 @@ TARDIS-Connector 2025 Project
 
 ## Links
 
-* [TARDIS-Connector 2025](https://tardis-sn.github.io/connector25/)
+* [TARDIS Connector 2025](https://tardis-sn.github.io/connector25/)
 * [2025 workshop website](https://tardis-sn.github.io/tardis-connector/2025)

@@ -14,11 +14,12 @@ plugins:
   - search
 
 nav:
-  - Home: index.md
-  - Installation: installation.md
-  - Run the Connector on HPCC: running_on_hpcc.md
-  - MESA to STIR: mesa_to_stir.md
-  - STIR to STELLA: stir_to_stella.md
-  - STELLA to TARDIS: stella_to_tardis.md
+  - 🏠 Home: index.md
+  - 🔧 Installation: installation.md
+  - 🖥️ Run the Connector on HPCC: running_on_hpcc.md
+  - 🏗️ The Connector Pipeline:
+    - MESA → STIR: mesa_to_stir.md
+    - STIR → STELLA: stir_to_stella.md
+    - STELLA → TARDIS: stella_to_tardis.md
 
 copyright: Copyright &copy; 2025 TARDIS Connector
