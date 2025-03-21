@@ -112,14 +112,17 @@ def parse_stella_models_to_tardis_configs(
         names=["time", "logL_bol", "logL_nuc"],
     )
     df_bol["L_nuc_ratio"] = 10 ** (df_bol["logL_nuc"] - df_bol["logL_bol"])
-    max_photopheric_day = np.where(df_bol["L_nuc_ratio"].values <= l_nuc_ratio_upper_limit)[0][-1]
+    max_photospheric_day = df_bol.time.values[
+        df_bol["L_nuc_ratio"].values <= l_nuc_ratio_upper_limit
+    ][-1]
 
     # extract the days that have available stella profiles
-    days_stella_profiles = np.array(
-        [float(file.split("/")[-1].split("_")[0].split("day")[1]) for file in stella_output_files]
-    )
+    days_stella_profiles_str = [
+        file.split("/")[-1].split("_")[0].split("day")[1] for file in stella_output_files
+    ]
+    days_stella_profiles = np.array([float(item) for item in days_stella_profiles_str])
     days_stella_profiles_photospheric = days_stella_profiles[
-        days_stella_profiles <= max_photopheric_day
+        days_stella_profiles <= max_photospheric_day
     ]
 
     ###### Read the stella model and convert to tardis config
@@ -148,6 +151,9 @@ def parse_stella_models_to_tardis_configs(
         if skip_nonhomologous_models is not False:
             non_homologous_shell = np.where(np.diff(df_stella_data["cell_center_v"]) < 0)[0]
             if non_homologous_shell.shape[0] > max_nonhomologous_shells:
+                logger.warning(
+                    f"Day {day} has more than {max_nonhomologous_shells} non-homologous shells, skipping the model"
+                )
                 continue
             else:
                 # filter out the non homologous shells
@@ -244,6 +250,9 @@ def parse_stella_models_to_tardis_configs(
         ph_idx = df_stella_data.index[df_stella_data["tau"].sub(1).abs().idxmin()]
         T_inner_guess = df_stella_data.loc[ph_idx, "radiation_temperature"]
 
+        # get the day str that match the stella output
+        day_str = days_stella_profiles_str[i]
+
         # write the tardis config file
         modify_parameters = {
             "supernova": {
@@ -252,16 +261,16 @@ def parse_stella_models_to_tardis_configs(
             },
             "plasma": {"initial_t_inner": f"{T_inner_guess} K"},
         }
-        new_config_path = f"{tardis_config_output_folder_path}/Day_{day}_mesa_stella_tardis.yml"
+        new_config_path = f"{tardis_config_output_folder_path}/Day_{day_str}_mesa_stella_tardis.yml"
         write_tardis_config(
             tardis_sample_config_path,
             modify_parameters,
             new_config_path,
-            csvy_model_path=f"Day_{day}_mesa_stella_model.csvy",
+            csvy_model_path=f"Day_{day_str}_mesa_stella_model.csvy",
         )
 
         # write the tardis csvy file
-        new_csvy_path = f"{tardis_config_output_folder_path}/Day_{day}_mesa_stella_model.csvy"
+        new_csvy_path = f"{tardis_config_output_folder_path}/Day_{day_str}_mesa_stella_model.csvy"
         modify_csvy_headers = {
             "name": "mesa_stella_model.csvy",
             "model_density_time_0": f"{day_since_SBO:.4f} day",
