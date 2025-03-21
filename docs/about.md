@@ -1,6 +1,6 @@
 # About
 
-## The TARDIS Connector TEAM
+## The TARDIS Connector Team
 
 * [Andrea Antoni](https://acantoni.com/)
 * Brandon Barker
@@ -12,7 +12,7 @@
 * Andrew Fullard
 * [Jared Goldberg](https://jaredagoldberg.wordpress.com/)
 * Aldana Grichener
-* Yan-Fei Jiang
+* [Yan-Fei Jiang](https://jiangyanfei1986.wixsite.com/yanfei-homepage)
 * [Wolfgang Kerzendorf](https://wkerzendorf.github.io/)
 * [Philip Mocz](https://pmocz.github.io/)
 * Jing Lu
