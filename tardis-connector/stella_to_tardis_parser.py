@@ -67,27 +67,24 @@ def parse_stella_models_to_tardis_configs(
     # check the stella model files
     stella_output_files = sorted(glob.glob(f"{stella_folder_path}/res/mesa.day*"))
     if len(stella_output_files) == 0:
-        logger.error(
-            f"No stella model files found in the folder: {stella_folder_path}/res"
+        raise FileNotFoundError(
+            f"No stella model files found in {stella_folder_path}/res"
         )
-        return None
 
     # check the stella mesa.lbol_lnuc.txt file
     L_bol_file = f"{stella_folder_path}/res/mesa.lbol_lnuc.txt"
     if not Path(L_bol_file).exists():
-        logger.error(
+        raise FileNotFoundError(
             f"No mesa.lbol_lnuc.txt file found in the folder: {stella_folder_path}/res"
         )
-        return None
 
     # check if the MESA profile exisits
     if interpolate_mass_fractions:
         mesa_profile_file = f"{stella_folder_path}/profile1.data"
         if not Path(mesa_profile_file).exists():
-            logger.error(
+            raise FileNotFoundError(
                 f"No mesa profile1.data file found in the folder: {stella_folder_path}/res"
             )
-            return None
 
     # check if the tardis examples files exsits
     tardis_sample_config_path = (
@@ -97,23 +94,22 @@ def parse_stella_models_to_tardis_configs(
         f"{tardis_example_config_folder_path}/tardis_example_csvy.csvy"
     )
     if not Path(tardis_sample_config_path).exists():
-        logger.error(
+        raise FileNotFoundError(
             f"No tardis example config file found in the folder: {tardis_example_config_folder_path}"
         )
-        return None
+
     if not Path(tardis_sample_csvy_path).exists():
-        logger.error(
+        raise FileNotFoundError(
             f"No tardis example csvy file found in the folder: {tardis_example_config_folder_path}"
         )
-        return None
 
-    # make the output folder if it doesn't exsit yet
+    # make the output folder if it doesn't exist yet
     if tardis_config_output_folder_path is None:
         logger.info(
-            f"No config output folder path provided. Dumping config to {stella_folder_path}/tardis_configs"
+            f"No config output folder path provided. Defaulting to {stella_folder_path}/tardis_configs"
         )
-        tardis_config_output_folder_path = f"{stella_folder_path}/tardis_configs"
-    Path(tardis_config_output_folder_path).mkdir(parents=True, exist_ok=True)
+        tardis_config_output_folder_path = Path(f"{stella_folder_path}/tardis_configs")
+    tardis_config_output_folder_path.mkdir(parents=True, exist_ok=True)
 
     #######
     # extract the maximum day within photospheric assumption using l_nuc_ratio_upper_limit
@@ -141,9 +137,9 @@ def parse_stella_models_to_tardis_configs(
 
     ###### Read the stella model and convert to tardis config
     # loop through each profile check if they are monotonically increasing
-    for i, day in enumerate(days_stella_profiles_photospheric):
+    for day_index, day in enumerate(days_stella_profiles_photospheric):
         # read the stella model
-        stella_model = read_stella_model(stella_output_files[i])
+        stella_model = read_stella_model(stella_output_files[day_index])
         df_stella_data = stella_model.data
 
         # shift the center v to boundary v (TARDIS take inner boundary and center density)
@@ -284,7 +280,7 @@ def parse_stella_models_to_tardis_configs(
         T_inner_guess = df_stella_data.loc[ph_idx, "radiation_temperature"]
 
         # get the day str that matches the stella output
-        day_str = days_stella_profiles_str[i]
+        day_str = days_stella_profiles_str[day_index]
 
         # write the tardis config file
         modify_parameters = {
@@ -298,7 +294,8 @@ def parse_stella_models_to_tardis_configs(
         write_tardis_config(
             tardis_sample_config_path,
             modify_parameters,
-            output_config_path=f"{tardis_config_output_folder_path}/Day_{day_str}_mesa_stella_tardis.yml",
+            output_config_path=tardis_config_output_folder_path
+            / f"Day_{day_str}_mesa_stella_tardis.yml",
             csvy_model_path=f"Day_{day_str}_mesa_stella_model.csvy",
         )
 
@@ -314,10 +311,11 @@ def parse_stella_models_to_tardis_configs(
             tardis_sample_csvy_path,
             modify_csvy_headers,
             df_stella_for_tardis,
-            output_csvy_path=f"{tardis_config_output_folder_path}/Day_{day_str}_mesa_stella_model.csvy",
+            output_csvy_path=tardis_config_output_folder_path
+            / f"Day_{day_str}_mesa_stella_model.csvy",
         )
         logger.info(
-            f"Day {day_str} model converted to TARDIS config and csvy format, {tardis_config_output_folder_path}/Day_{day_str}_mesa_stella_model.csvy and .yml"
+            f"Day {day_str} model converted to TARDIS config and csvy format, {tardis_config_output_folder_path.name}/Day_{day_str}_mesa_stella_model.csvy and .yml"
         )
 
 
