@@ -28,6 +28,7 @@ TAU_LOWER_LIMIT = (
 )
 SHRINK_SHELL_NUMBER = False  # False or int, if int then end up with this int as total shell numbers that keep the velocity range but lower the grid resolution
 L_NUC_RATIO_UPPER_LIMIT = 0.8  # default 0.8, criteria to determine if the photosphere holds, means L_nuc/L_bol <= 0.8
+LOGGING_LEVEL = logging.INFO
 ##########################################
 
 
@@ -320,6 +321,7 @@ def parse_stella_models_to_tardis_configs(
 
 
 if __name__ == "__main__":
+    logging.basicConfig(level=LOGGING_LEVEL)
     STELLA_model_folder = sys.argv[1]
     output_folder_path = None
 
