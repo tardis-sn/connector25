@@ -1,9 +1,14 @@
 import yaml
+import logging
 
 from tardis.util.base import is_valid_nuclide_or_elem
 
+logger = logging.getLogger(__name__)
 
-def write_tardis_csvy(tardis_sample_csvy_path, modify_csvy_headers, df_csv, new_csvy_path):
+
+def write_tardis_csvy(
+    tardis_sample_csvy_path, modify_csvy_headers, df_csv, output_csvy_path
+):
     """
     Purpose:
     ---------
@@ -13,7 +18,7 @@ def write_tardis_csvy(tardis_sample_csvy_path, modify_csvy_headers, df_csv, new_
     Parameters:
         modify_csvy_headers: dict
             The dictionary that contains the to-be modified headers
-        new_csvy_path: str
+        output_csvy_path: str
             The path to the new csvy file
     """
     # Read the sample csvy file
@@ -43,29 +48,33 @@ def write_tardis_csvy(tardis_sample_csvy_path, modify_csvy_headers, df_csv, new_
     # Convert the csv data to lines
     fields_columns = [field["name"] for field in fields]
     csv_lines = (
-        df_csv[fields_columns].to_csv(index=False, float_format="%.5e", sep=",").splitlines()
+        df_csv[fields_columns]
+        .to_csv(index=False, float_format="%.5e", sep=",")
+        .splitlines()
     )
     csv_lines = [line + "\n" for line in csv_lines]
 
     # Save the updated csvy data
-    updated_csvy_lines = csvy_lines[: start_index + 1] + yml_lines + ["---\n"] + csv_lines
-    with open(new_csvy_path, "w") as file:
+    updated_csvy_lines = (
+        csvy_lines[: start_index + 1] + yml_lines + ["---\n"] + csv_lines
+    )
+    with open(output_csvy_path, "w") as file:
         file.writelines(updated_csvy_lines)
 
 
 def get_fields_names(column_names):
-    """get the field names for csvy file based the column names
-       also get rid of the isotopes that is not valid in tardis database
+    """Create appropriate tardis csvy fields based on column names of a dataframe.
+       Also create create fields for valid isotopes found in the dataframe that are in the tardis database.
 
     Parameters
     ----------
-    column_names : _type_
-        _description_
+    column_names : list
+        List of column names from a dataframe
 
     Returns
     -------
-    _type_
-        _description_
+    fields : list
+        List of dictionaries containing field names, units, and descriptions
     """
     fields = [
         {
@@ -116,13 +125,16 @@ def get_fields_names(column_names):
                 }
             )
         else:
-            print(f"{element} is not valid nuclide in tardis database.")
+            logger.warning(f"{element} is not a valid nuclide in the tardis database.")
 
     return fields
 
 
 def write_tardis_config(
-    tardis_sample_config_path, modify_parameters, new_config_path, csvy_model_path=None
+    tardis_sample_config_path,
+    modify_parameters,
+    output_config_path,
+    csvy_model_path=None,
 ):
     """
     Purpose:
@@ -133,7 +145,7 @@ def write_tardis_config(
     Parameters:
         modified_parameters: dict
             The dictionary that contains the to-be modified parameters
-        new_config_path: str
+        output_config_path: str
             The path to the new config file
     """
     # load in the sample config yml
@@ -149,5 +161,5 @@ def write_tardis_config(
         config["csvy_model"] = csvy_model_path
 
     # Save the modified config back to a new YAML file
-    with open(new_config_path, "w") as file:
+    with open(output_config_path, "w") as file:
         yaml.safe_dump(config, file, sort_keys=False)

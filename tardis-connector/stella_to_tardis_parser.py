@@ -20,12 +20,14 @@ SKIP_NONHOMOLOGOUS_MODELS = (
     True  # boolean, if True then skip non-homologous models and not save them
 )
 MAX_NONHOMOLOGOUS_SHELLS = 5  # int, if active if SKIP_NONHOMOLOGOUS_MODELS is True, the maximum number of non-homologous shells to skip
-TAU_UPPER_LIMIT = 1e3  # False or float, filter out the shells that has tau larger than this value
-TAU_LOWER_LIMIT = False  # False or float, filter out the shells that has tau larger than this value
-SHRINK_SHELL_NUMBER = False  # False or int, if int then end up with this int as total shell numbers that keep the velocity range but lower the grid resolution
-L_NUC_RATIO_UPPER_LIMIT = (
-    0.8  # default 0.8, criteria to determine if the photosphere holds, means L_nuc/L_bol <= 0.8
+TAU_UPPER_LIMIT = (
+    1e3  # False or float, filter out the shells that has tau larger than this value
 )
+TAU_LOWER_LIMIT = (
+    False  # False or float, filter out the shells that has tau larger than this value
+)
+SHRINK_SHELL_NUMBER = False  # False or int, if int then end up with this int as total shell numbers that keep the velocity range but lower the grid resolution
+L_NUC_RATIO_UPPER_LIMIT = 0.8  # default 0.8, criteria to determine if the photosphere holds, means L_nuc/L_bol <= 0.8
 ##########################################
 
 
@@ -61,17 +63,21 @@ def parse_stella_models_to_tardis_configs(
     Convert the stella model to a tardis config with csvy format, saving at
     """
 
-    ###  check all the required files exsits in the folder
+    ###  check all the required files exist in the folder
     # check the stella model files
     stella_output_files = sorted(glob.glob(f"{stella_folder_path}/res/mesa.day*"))
     if len(stella_output_files) == 0:
-        logger.error(f"No stella model files found in the folder: {stella_folder_path}/res")
+        logger.error(
+            f"No stella model files found in the folder: {stella_folder_path}/res"
+        )
         return None
 
     # check the stella mesa.lbol_lnuc.txt file
     L_bol_file = f"{stella_folder_path}/res/mesa.lbol_lnuc.txt"
     if not Path(L_bol_file).exists():
-        logger.error(f"No mesa.lbol_lnuc.txt file found in the folder: {stella_folder_path}/res")
+        logger.error(
+            f"No mesa.lbol_lnuc.txt file found in the folder: {stella_folder_path}/res"
+        )
         return None
 
     # check if the MESA profile exisits
@@ -87,7 +93,9 @@ def parse_stella_models_to_tardis_configs(
     tardis_sample_config_path = (
         f"{tardis_example_config_folder_path}/tardis_template_config_SESN.yml"
     )
-    tardis_sample_csvy_path = f"{tardis_example_config_folder_path}/tardis_example_csvy.csvy"
+    tardis_sample_csvy_path = (
+        f"{tardis_example_config_folder_path}/tardis_example_csvy.csvy"
+    )
     if not Path(tardis_sample_config_path).exists():
         logger.error(
             f"No tardis example config file found in the folder: {tardis_example_config_folder_path}"
@@ -101,6 +109,9 @@ def parse_stella_models_to_tardis_configs(
 
     # make the output folder if it doesn't exsit yet
     if tardis_config_output_folder_path is None:
+        logger.info(
+            f"No config output folder path provided. Dumping config to {stella_folder_path}/tardis_configs"
+        )
         tardis_config_output_folder_path = f"{stella_folder_path}/tardis_configs"
     Path(tardis_config_output_folder_path).mkdir(parents=True, exist_ok=True)
 
@@ -120,7 +131,8 @@ def parse_stella_models_to_tardis_configs(
 
     # extract the days that have available stella profiles
     days_stella_profiles_str = [
-        file.split("/")[-1].split("_")[0].split("day")[1] for file in stella_output_files
+        file.split("/")[-1].split("_")[0].split("day")[1]
+        for file in stella_output_files
     ]
     days_stella_profiles = np.array([float(item) for item in days_stella_profiles_str])
     days_stella_profiles_photospheric = days_stella_profiles[
@@ -136,7 +148,8 @@ def parse_stella_models_to_tardis_configs(
 
         # shift the center v to boundary v (TARDIS take inner boundary and center density)
         v_inner_edge = (
-            df_stella_data["cell_center_v"].values[:-1] + df_stella_data["cell_center_v"].values[1:]
+            df_stella_data["cell_center_v"].values[:-1]
+            + df_stella_data["cell_center_v"].values[1:]
         ) / 2
         center_densities = df_stella_data["avg_density"].values[:-1]
         df_stella_data = df_stella_data.iloc[:-1].reset_index(drop=True)
@@ -145,18 +158,20 @@ def parse_stella_models_to_tardis_configs(
 
         # filter out the optical thick shells
         if tau_upper_limit is not False:
-            df_stella_data = df_stella_data[df_stella_data["tau"] <= tau_upper_limit].reset_index(
-                drop=True
-            )
-        # filter out the optical TOO think shells
+            df_stella_data = df_stella_data[
+                df_stella_data["tau"] <= tau_upper_limit
+            ].reset_index(drop=True)
+        # filter out the optical thin shells above specified value - probably don't meaningfully contribute to the spectrum
         if tau_lower_limit is not False:
-            df_stella_data = df_stella_data[df_stella_data["tau"] >= tau_lower_limit].reset_index(
-                drop=True
-            )
+            df_stella_data = df_stella_data[
+                df_stella_data["tau"] >= tau_lower_limit
+            ].reset_index(drop=True)
 
         # check if the model is homologous
         if skip_nonhomologous_models is not False:
-            non_homologous_shell = np.where(np.diff(df_stella_data["cell_center_v"]) < 0)[0]
+            non_homologous_shell = np.where(
+                np.diff(df_stella_data["cell_center_v"]) < 0
+            )[0]
             if non_homologous_shell.shape[0] > max_nonhomologous_shells:
                 logger.warning(
                     f"Day {day} has more than {max_nonhomologous_shells} non-homologous shells, skipping the model"
@@ -164,9 +179,9 @@ def parse_stella_models_to_tardis_configs(
                 continue
             else:
                 # filter out the non homologous shells
-                df_stella_data = df_stella_data.drop(non_homologous_shell, axis=0).reset_index(
-                    drop=True
-                )
+                df_stella_data = df_stella_data.drop(
+                    non_homologous_shell, axis=0
+                ).reset_index(drop=True)
 
         # check if the user want to shrink the shell number
         if shrink_shell_number is not False:
@@ -178,7 +193,9 @@ def parse_stella_models_to_tardis_configs(
         # filter out the columns that are not needed for TARDIS
         matter_columns = ["cell_center_v", "avg_density", "radiation_temperature"]
         composition_columns_stella = [
-            col for col in df_stella_data.columns if col[0].isalpha() and col[-1].isdigit()
+            col
+            for col in df_stella_data.columns
+            if col[0].isalpha() and col[-1].isdigit()
         ]
 
         # interpolate the mass fractions based on MESA profile instead of using STELLA composition
@@ -200,7 +217,7 @@ def parse_stella_models_to_tardis_configs(
 
             # interpolate the mass fractions from mesa profile onto stella mass grid
             for isotope in composition_columns_profile:
-                # first get a function that represent the MESA profile mass fraction
+                # first get a function that represents the MESA profile mass fraction
                 mesa_mass_grid = (
                     df_profile["mass"].astype(np.float64).values[::-1]
                 )  # MESA going inwards
@@ -216,7 +233,9 @@ def parse_stella_models_to_tardis_configs(
                 # interpolate onto the stella mass grid
                 stella_mass_grid = df_stella_data["cell_center_m"].astype(
                     np.float64
-                ).values * u.g.to(u.Msun)  # Stella has unit of g but MESA has units of Msun
+                ).values * u.g.to(
+                    u.Msun
+                )  # Stella has unit of g but MESA has units of Msun
                 itp_mass_fraction = f_itp(stella_mass_grid)
                 df_stella_for_tardis.loc[:, isotope[0].capitalize() + isotope[1:]] = (
                     itp_mass_fraction
@@ -229,13 +248,18 @@ def parse_stella_models_to_tardis_configs(
                 if isotope not in composition_columns_profile
             ]
             for isotope in stella_unique_isotopes:
-                df_stella_for_tardis.loc[:, isotope[0].capitalize() + isotope[1:]] = df_stella_data[
-                    isotope
-                ]
+                df_stella_for_tardis.loc[:, isotope[0].capitalize() + isotope[1:]] = (
+                    df_stella_data[isotope]
+                )
         else:
-            df_stella_for_tardis = df_stella_data[matter_columns + composition_columns_stella]
+            df_stella_for_tardis = df_stella_data[
+                matter_columns + composition_columns_stella
+            ]
             df_stella_for_tardis = df_stella_for_tardis.rename(
-                columns={col: col[0].capitalize() + col[1:] for col in composition_columns_stella}
+                columns={
+                    col: col[0].capitalize() + col[1:]
+                    for col in composition_columns_stella
+                }
             )
 
         # update the column names
@@ -259,7 +283,7 @@ def parse_stella_models_to_tardis_configs(
         ph_idx = df_stella_data.index[df_stella_data["tau"].sub(1).abs().idxmin()]
         T_inner_guess = df_stella_data.loc[ph_idx, "radiation_temperature"]
 
-        # get the day str that match the stella output
+        # get the day str that matches the stella output
         day_str = days_stella_profiles_str[i]
 
         # write the tardis config file
@@ -270,16 +294,15 @@ def parse_stella_models_to_tardis_configs(
             },
             "plasma": {"initial_t_inner": f"{T_inner_guess} K"},
         }
-        new_config_path = f"{tardis_config_output_folder_path}/Day_{day_str}_mesa_stella_tardis.yml"
+
         write_tardis_config(
             tardis_sample_config_path,
             modify_parameters,
-            new_config_path,
+            output_config_path=f"{tardis_config_output_folder_path}/Day_{day_str}_mesa_stella_tardis.yml",
             csvy_model_path=f"Day_{day_str}_mesa_stella_model.csvy",
         )
 
         # write the tardis csvy file
-        new_csvy_path = f"{tardis_config_output_folder_path}/Day_{day_str}_mesa_stella_model.csvy"
         modify_csvy_headers = {
             "name": "mesa_stella_model.csvy",
             "model_density_time_0": f"{day_since_SBO:.4f} day",
@@ -288,11 +311,27 @@ def parse_stella_models_to_tardis_configs(
             "v_inner_boundary": f"{df_stella_for_tardis['velocity'].min():.5e} cm/s",
         }
         write_tardis_csvy(
-            tardis_sample_csvy_path, modify_csvy_headers, df_stella_for_tardis, new_csvy_path
+            tardis_sample_csvy_path,
+            modify_csvy_headers,
+            df_stella_for_tardis,
+            output_csvy_path=f"{tardis_config_output_folder_path}/Day_{day_str}_mesa_stella_model.csvy",
         )
-        print(f"Day {day_str} model converted to TARDIS config and csvy format")
+        logger.info(
+            f"Day {day_str} model converted to TARDIS config and csvy format, {tardis_config_output_folder_path}/Day_{day_str}_mesa_stella_model.csvy and .yml"
+        )
 
 
 if __name__ == "__main__":
     STELLA_model_folder = sys.argv[1]
-    parse_stella_models_to_tardis_configs(STELLA_model_folder, "TARDIS_template_configs")
+    output_folder_path = None
+
+    if len(sys.argv) > 2:
+        output_folder_path = sys.argv[
+            2
+        ]  # This triggers a logger warning later that mentions where the output is saved
+
+    parse_stella_models_to_tardis_configs(
+        stella_folder_path=STELLA_model_folder,
+        tardis_example_config_folder_path="TARDIS_template_configs",
+        tardis_config_output_folder_path=output_folder_path,
+    )
