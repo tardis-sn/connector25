@@ -593,22 +593,7 @@
 
 <h1 id="stir-to-snec-conversion">STIR to SNEC conversion</h1>
 <h2 id="inputs-to-stir">Inputs to STIR</h2>
-<p><code>STIR</code> takes as input a stellar model (density, temperature, radius, radial 
-velocity, ye, 1/Abar). <code>STIR</code> requires an input file <code>flash.par</code> which 
-configures, e.g., grid options such as radial extent and adaptive mesh 
-refinement levels and criteria. This is where the run base name (<code>basenm</code>), 
-model file, and output directory are set. To run <code>STIR</code>, navigate to 
-<code>obj_ccsn1dMLTnoHyb/run</code> and then <code>./stir -par_file inputs/stir.par</code> 
-(or, with MPI, e.g.m <code>mpirun -n 8 ./stir -par_file inputs/stir.par</code>).</p>
 <h2 id="outputs-from-stir">Outputs from STIR</h2>
-<p><code>STIR</code> outputs hydrodynamic and radiation radial profiles as a function of time
-in the <code>output</code> directory. These are HDF5 files. Quantities of interest might 
-include density, temperature, pressure, energies, ye, and velocity.
-<code>STIR</code> outputs integrated time series data in a <code>.dat</code> file prefixed with the 
-run <code>basenm</code> -- these are not in the <code>outputs</code> directory. The columns are 
-labeled and include quantities such as central density, diagnostic explosion 
-energy, mean shock radius, and mass accretion rate as a function of time.
-There is also a <code>.log</code> file which summarizes options for the current run.</p>
 <h2 id="inputs-to-snec">Inputs to SNEC</h2>
 
 
