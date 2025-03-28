@@ -1,5 +1,5 @@
 ---
-  name: Static Analysis
+  name: static analysis
   
   on:
     workflow_dispatch:
