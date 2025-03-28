@@ -7,6 +7,19 @@ on:
   [push]
 
 jobs:
+  lint:
+    name: Lint Documentation
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Checkout main
+        uses: actions/checkout@v4
+
+      - name: Lint Markdown
+        uses: DavidAnson/markdownlint-cli2-action@v19
+        continue-on-error: true
+        with:
+          globs: '**/*.md'
+
   build:
     name: Build and Deploy Documentation
     runs-on: ubuntu-latest
