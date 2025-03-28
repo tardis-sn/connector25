@@ -1,0 +1,8 @@
+progenitor_directory: "./progenitors"
+progenitor_suffix: ""
+stir_profiles_directory: "./stir_profiles"
+stir_profiles_suffix: "_hdf5_plt_cnt"
+output_directory: "./output"
+output_suffix: "_stir_output"
+eos_file_path: "SFHo.h5"
+cell_edge_velocity: True
