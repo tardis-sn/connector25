@@ -25,6 +25,7 @@ TARDIS Connector 2025 Project
 
 🌟 [MESA](https://github.com/MESAHub/mesa) Stellar Evolution
 * [EB Farag](https://github.com/Debraheem) 📌
+* [Mathieu Renzo](https://github.com/mathren)
 * [Aldana Grichener](https://github.com/AldanaGrichener)
 * Andrea Antoni
 * [Jared Goldberg](https://github.com/aurimontem)
@@ -71,3 +72,4 @@ TARDIS Connector 2025 Project
 
 * [TARDIS Connector 2025](https://tardis-sn.github.io/connector25/)
 * [2025 workshop website](https://tardis-sn.github.io/tardis-connector/2025)
+* [Overleaf](https://www.overleaf.com/project/67d878020ea15b5c5aa9e3d0)
