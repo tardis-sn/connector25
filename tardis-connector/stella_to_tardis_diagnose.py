@@ -27,15 +27,21 @@ def plot_profile_data(
     if tardis_config_folder is not None:
         tardis_csvy_files = sorted(glob.glob(f"{tardis_config_folder}/*.csvy"))
         # stripp the days from the csvy files
-        days_str = [csvy_file.split("/")[-1].split("_")[1] for csvy_file in tardis_csvy_files]
+        days_str = [
+            csvy_file.split("/")[-1].split("_")[1] for csvy_file in tardis_csvy_files
+        ]
     else:
         profile_files = glob.glob(f"{stella_model_path}/res/mesa.day*")
-        days_str = [file.split("/")[-1].split("_")[0].split("day")[1] for file in profile_files]
+        days_str = [
+            file.split("/")[-1].split("_")[0].split("day")[1] for file in profile_files
+        ]
 
     # generate a color set for each day
     color_set = cm.cool(np.linspace(0, 1, len(days_str)))
 
-    fig, axes = plt.subplots(len(y_col_s), 1, figsize=(8, 2.5 * len(y_col_s)), sharex=True)
+    fig, axes = plt.subplots(
+        len(y_col_s), 1, figsize=(8, 2.5 * len(y_col_s)), sharex=True
+    )
     fig.subplots_adjust(hspace=0)
 
     for i, day_str in enumerate(days_str):
@@ -55,7 +61,9 @@ def plot_profile_data(
                 axes[y_col_s.index("tau")].axhline(
                     y=tau_upper_limit, color="k", linestyle="--", lw=0.5
                 )
-            df_model_stella = stella_model.data[stella_model.data["tau"] <= tau_upper_limit]
+            df_model_stella = stella_model.data[
+                stella_model.data["tau"] <= tau_upper_limit
+            ]
             for j, y_col in enumerate(y_col_s):
                 axes[j].plot(
                     df_model_stella[x_col],
@@ -79,7 +87,10 @@ def plot_profile_data(
 
 
 def plot_bolometric_LC(
-    STELLA_model_folder, L_NUC_RATIO_UPPER_LIMIT=None, tardis_config_folder=None, ax=None
+    STELLA_model_folder,
+    L_NUC_RATIO_UPPER_LIMIT=None,
+    tardis_config_folder=None,
+    ax=None,
 ):
     lbol_file = f"{STELLA_model_folder}/res/mesa.lbol_lnuc.txt"
     df_bol = pd.read_csv(
@@ -109,11 +120,14 @@ def plot_bolometric_LC(
     if tardis_config_folder is not None:
         tardis_csvy_files = glob.glob(f"{tardis_config_folder}/*.csvy")
         days_tardis = [
-            float(csvy_file.split("/")[-1].split("_")[1]) for csvy_file in tardis_csvy_files
+            float(csvy_file.split("/")[-1].split("_")[1])
+            for csvy_file in tardis_csvy_files
         ]
         for day in days_tardis:
             day_index = np.argmin(np.abs(df_bol["time"].values - day))
-            ax.scatter(day, df_bol["logL_bol"].values[day_index], marker="o", color="tab:blue")
+            ax.scatter(
+                day, df_bol["logL_bol"].values[day_index], marker="o", color="tab:blue"
+            )
 
     # plot the bolometric luminosity
     ax.plot(df_bol["time"], df_bol["logL_bol"], label="logL_bol")

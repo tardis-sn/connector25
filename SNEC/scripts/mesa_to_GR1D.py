@@ -79,8 +79,12 @@ for i in range(1, nzones):
 
 # inner boundary: extrapolate
 # velocity and omega
-arr[4, 0] = (arr[4, 1] - arr[4, 0]) / (arr[1, 1] - arr[1, 0]) * (crad[0] - arr[1, 0]) + arr[4, 0]
-arr[6, 0] = (arr[6, 1] - arr[6, 0]) / (arr[1, 1] - arr[1, 0]) * (crad[0] - arr[1, 0]) + arr[6, 0]
+arr[4, 0] = (arr[4, 1] - arr[4, 0]) / (arr[1, 1] - arr[1, 0]) * (
+    crad[0] - arr[1, 0]
+) + arr[4, 0]
+arr[6, 0] = (arr[6, 1] - arr[6, 0]) / (arr[1, 1] - arr[1, 0]) * (
+    crad[0] - arr[1, 0]
+) + arr[6, 0]
 for i in range(1, nzones):
     arr[4, i] = (arr[4, i - 1] + arr[4, i]) / 2.0
     arr[6, i] = (arr[6, i - 1] + arr[6, i]) / 2.0

@@ -1,19 +1,20 @@
 """
 
- This file generates a pattern used for the gridding of the SNEC models
+This file generates a pattern used for the gridding of the SNEC models
 
- Total number of grid points is equal to imax.
- Current pattern consists of two geometric progressions, connected at the
- point itran and ensuring finer resolution of the grid in the inner (explosion)
- region and the surface region of the models.
+Total number of grid points is equal to imax.
+Current pattern consists of two geometric progressions, connected at the
+point itran and ensuring finer resolution of the grid in the inner (explosion)
+region and the surface region of the models.
 
- ratio1 gives the ratio between the size of the first and itran-th cell
- ratio2 gives the ratio between the size of the last  and itran-th cell
+ratio1 gives the ratio between the size of the first and itran-th cell
+ratio2 gives the ratio between the size of the last  and itran-th cell
 
- Modified by Mathieu Renzo 20250321 to make imax an input
+Modified by Mathieu Renzo 20250321 to make imax an input
 """
 
 import sys
+
 
 def make_SNEC_grid(output_file: str):
     # read from command line
@@ -50,7 +51,6 @@ def make_SNEC_grid(output_file: str):
             outfile.write(str(grid_pattern[l]) + "\n")
 
     print("done!")
-
 
 
 if __name__ == "__main__":

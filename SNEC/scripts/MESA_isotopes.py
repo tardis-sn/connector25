@@ -4,7 +4,9 @@ import sys
 import numpy as np
 
 path = sys.argv[1]  # first argument is the path of the MESA profile we want to convert
-pathout = sys.argv[2] # second argument is the path where to save the output (must include the extension)
+pathout = sys.argv[
+    2
+]  # second argument is the path where to save the output (must include the extension)
 
 msun = 1.99e33
 rsun = 6.96e10
@@ -264,9 +266,7 @@ iso_num = len(isolist)
 Z = [2, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28]
 A = [4, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56]
 
-massfracsShort = (
-    []
-)  # will be a list of the isotope mass fraction profiles once the isotopes are grouped
+massfracsShort = []  # will be a list of the isotope mass fraction profiles once the isotopes are grouped
 
 """
 massfracs_p = arr[:,columnNames.index('h1')]
@@ -290,9 +290,7 @@ for i in range(
             groupMassfracs.append(arr[:, ind])  # at the end of the loop groupMassfracs
             # is a matrix: every line is an isotope, every column a zone
         groupArr = np.array(groupMassfracs)  # cast it into numbers
-        TgroupArr = (
-            groupArr.T
-        )  # .T means transpose: we get a matrix in which each column is for an isotope and each row for a zone
+        TgroupArr = groupArr.T  # .T means transpose: we get a matrix in which each column is for an isotope and each row for a zone
     # we have a matrix for each group
     zonesum = []
     for j in range(0, zones):
@@ -321,16 +319,16 @@ outfile.write(
 for i in range(zones, 0, -1):
     writeNewLine = "%15.6E" % (arr[i - 1, imass] * msun)  # mass in grams
     writeNewLine += "%15.6E" % (arr[i - 1, iradius] * rsun)  # radius in cm
-    writeNewLine += "%15.6E" % (
-        arr[i - 1, ineut]
+    writeNewLine += (
+        "%15.6E" % (arr[i - 1, ineut])
     )  # abundance of neutrons as MESA gives it
     writeNewLine += "%15.6E" % (
-        max(1e-40, arr[i - 1, iprot]) # floor H to small value for stripped stars
+        max(1e-40, arr[i - 1, iprot])  # floor H to small value for stripped stars
     )  # abundance of h1 (no protons from photodisintegration)
 
     for newIso in massfracsShort:
-        writeNewLine += "%15.6E" % (
-            newIso[i - 1]
+        writeNewLine += (
+            "%15.6E" % (newIso[i - 1])
         )  # sum of the abundances of each element in the group
         # elements that I don't have in the output are just skipped
     outfile.write(writeNewLine + "\n")
