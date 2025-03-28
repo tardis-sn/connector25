@@ -1,11 +1,14 @@
 [![Repo Status][status-badge]][status-link]
 [![Docs Status][docs-badge]][docs-link]
+[![Static Analysis Status][static-badge]][static-link]
 [![License][license-badge]][license-link]
 
 [status-link]:         https://www.repostatus.org/#active
 [status-badge]:        https://www.repostatus.org/badges/latest/active.svg
 [docs-link]:           https://tardis-sn.github.io/connector25
 [docs-badge]:          https://github.com/tardis-sn/connector25/actions/workflows/mkdocs.yaml/badge.svg
+[static-link]:         https://github.com/tardis-sn/connector25/actions/workflows/static-analysis.yaml
+[static-badge]:        https://github.com/tardis-sn/connector25/actions/workflows/static-analysis.yaml/badge.svg
 [license-link]:        https://opensource.org/license/apache-2-0
 [license-badge]:       https://img.shields.io/github/license/tardis-sn/connector25
 
