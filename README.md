@@ -55,7 +55,7 @@ TARDIS Connector 2025 Project
 🌈 [TARDIS](https://github.com/tardis-sn/tardis) Radiative Transfer
 * [Jing Lu](https://github.com/DeerWhale) 📌
 * [Wolfgang Kerzendorf](https://github.com/wkerzendorf)
-* Anirban Dutta
+* [Anirban Dutta](https://github.com/Knights-Templars)
 * [Josh Shields](https://jvshields.github.io/)
 * [Andrew Fullard](https://github.com/andrewfullard)
 
