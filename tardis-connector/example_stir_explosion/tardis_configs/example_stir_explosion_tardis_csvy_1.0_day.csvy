@@ -4,7 +4,7 @@ model_density_time_0: 0.985 day
 model_isotope_time_0: 0.0 s
 description: CSVY model for SESN
 tardis_model_config_version: v1.0
-v_inner_boundary: 1.226677e+09 cm/s
+v_inner_boundary: 7.292964e+08 cm/s
 datatype:
   fields:
   - name: velocity

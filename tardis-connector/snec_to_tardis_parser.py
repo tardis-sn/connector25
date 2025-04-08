@@ -59,12 +59,11 @@ def parse_snec_to_tardis(
     tau_upper_limit=1e3,
     tau_lower_limit=1e-10,
     comps_profile_file_path=None,
-    comp_use_boxcared=False,
+    comp_use_boxcared=False,  # TODO: if true, need to rerun snec to have full isotopes
     snec_data_folder_path_comp_boxcar=None,
     use_vel_diff=False,
     num_keep_shells=45,
 ):
-    # TODO need to rerun snec to have full isotopes
     """
     Purpose:
     ---------
@@ -225,6 +224,7 @@ def parse_snec_to_tardis(
                     tau_lower_limit=tau_lower_limit,
                     num_keep_shells=num_keep_shells,
                 )
+                print("Saved TARDIS config and csvy file for time:", time)
 
     return dict_SNEC_output, df_snec_comps
 
@@ -290,7 +290,8 @@ def save_tardis_config_and_csvy(
         "name": new_csvy_path.split("/")[-1],
         "model_density_time_0": f"{time_in_day:.3f} day",
         "model_isotope_time_0": "0.0 s",
-        "v_inner_boundary": f"{dict_SNEC_output['vel_photo_itp'][time_index]:.6e} cm/s",
+        # "v_inner_boundary": f"{dict_SNEC_output['vel_photo_itp'][time_index]:.6e} cm/s", # as of April2025, the v_inner workflow csvy model HAVE to the use the first shell to start to avoid dim error
+        "v_inner_boundary": f"{df_profiles['velocity'].min():.6e} cm/s",
     }
     write_tardis_csvy(tardis_sample_csvy_path, modify_csvy_headers, df_csv, new_csvy_path)
 
