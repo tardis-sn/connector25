@@ -19,8 +19,10 @@ def run_tardis_from_yml(yml_file_path, spec_output_file, n_threads=1):
     workflow.run()
 
     # save the spectrum
-    spectrum = workflow.spectrum_solver.spectrum_real_packets
-    # spectrum = workflow.spectrum_solver.spectrum_integrated
+    # spectrum = workflow.spectrum_solver.spectrum_real_packets # from real packets, faster but noisier
+    spectrum = (
+        workflow.spectrum_solver.spectrum_integrated
+    )  # formal integral, takes longer but less noise
 
     wavelength = spectrum.wavelength.value[
         ::-1
@@ -31,9 +33,7 @@ def run_tardis_from_yml(yml_file_path, spec_output_file, n_threads=1):
     )
 
 
-def write_tardis_csvy(
-    tardis_sample_csvy_path, modify_csvy_headers, df_csv, output_csvy_path
-):
+def write_tardis_csvy(tardis_sample_csvy_path, modify_csvy_headers, df_csv, output_csvy_path):
     """
     Purpose:
     ---------
@@ -73,16 +73,12 @@ def write_tardis_csvy(
     # Convert the csv data to lines
     fields_columns = [field["name"] for field in fields]
     csv_lines = (
-        df_csv[fields_columns]
-        .to_csv(index=False, float_format="%.5e", sep=",")
-        .splitlines()
+        df_csv[fields_columns].to_csv(index=False, float_format="%.5e", sep=",").splitlines()
     )
     csv_lines = [line + "\n" for line in csv_lines]
 
     # Save the updated csvy data
-    updated_csvy_lines = (
-        csvy_lines[: start_index + 1] + yml_lines + ["---\n"] + csv_lines
-    )
+    updated_csvy_lines = csvy_lines[: start_index + 1] + yml_lines + ["---\n"] + csv_lines
     with open(output_csvy_path, "w") as file:
         file.writelines(updated_csvy_lines)
 
