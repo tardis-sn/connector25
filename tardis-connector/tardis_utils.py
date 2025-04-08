@@ -1,9 +1,34 @@
 import yaml
-import logging
+import pandas as pd
 
 from tardis.util.base import is_valid_nuclide_or_elem
 
-logger = logging.getLogger(__name__)
+from tardis.workflows.v_inner_solver import InnerVelocitySolverWorkflow
+from tardis.io.configuration.config_reader import Configuration
+
+
+def run_tardis_from_yml(yml_file_path, spec_output_file, n_threads=1):
+    # read in comfig from yml file
+    config = Configuration.from_yaml(yml_file_path)
+    config.montecarlo.nthreads = n_threads
+
+    # run the v_inner workflow
+    workflow = InnerVelocitySolverWorkflow(
+        config, tau=2.0 / 3, mean_optical_depth="rosseland", csvy=True
+    )
+    workflow.run()
+
+    # save the spectrum
+    spectrum = workflow.spectrum_solver.spectrum_real_packets
+    # spectrum = workflow.spectrum_solver.spectrum_integrated
+
+    wavelength = spectrum.wavelength.value[
+        ::-1
+    ]  # in Angstrom , [::-1] to make it in increasing order in wavelength
+    lum_dens = spectrum.luminosity_density_lambda.value[::-1]  # in erg/s/Angstrom/cm^2
+    pd.DataFrame({"wavelength": wavelength, "luminosity_density": lum_dens}).to_csv(
+        spec_output_file, index=False
+    )
 
 
 def write_tardis_csvy(
