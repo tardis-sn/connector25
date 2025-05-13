@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# this provides the syntax of do_one (run one part of test)
+# do_one [inlist] [output model] [LOGS directory]
+source "${MESA_DIR}/star/test_suite/test_suite_helpers"
+
+date "+DATE: %Y-%m-%d%nTIME: %H:%M:%S"
+
+# remove stella input 
+rm mesa.hyd
+rm mesa.abn
+
+# To do a thermal bomb instead, uncomment these
+# do_one inlist_prepare_header converted_maybe.mod LOGS_part_prepare 
+# do_one inlist_infall_header finished_infall.mod LOGS_part_infall
+# do_one inlist_end_infall_header ready_for_edep.mod LOGS_part_end_infall
+# do_one inlist_edep_header done_with_edep.mod LOGS_part_edep
+
+do_one inlist_shock_part1_header shock_part1.mod LOGS_part1
+cp shock_part1.mod shock_part4.mod
+do_one inlist_shock_part5_header shock_part5.mod LOGS_part5
+
+# Move LOGS around
+mkdir LOG_DIRS
+mv LOGS_part* LOG_DIRS
+cp mesa.hyd LOG_DIRS
+cp mesa.abn LOG_DIRS
+mkdir LOG_DIRS/inlists/
+cp inlist* LOG_DIRS/inlists/
+cp converted_maybe.mod LOG_DIRS
+cp finished_infall.mesa LOG_DIRS
+cp ready_for_edep.mod LOG_DIRS
+cp done_with_edep.mod LOG_DIRS
+cp shock_part*.mod LOG_DIRS
+
+
+# copy to stella and run stella
+cp mesa.hyd stella/modmake
+cp mesa.abn stella/modmake
+
+date "+DATE: %Y-%m-%d%nTIME: %H:%M:%S"
+
+# run stella
+cd stella/
+./rn
+cd ..
+cp -r stella/res LOG_DIRS/
+
+date "+DATE: %Y-%m-%d%nTIME: %H:%M:%S"
