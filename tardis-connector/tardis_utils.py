@@ -1,14 +1,39 @@
 import yaml
-import logging
+import pandas as pd
 
 from tardis.util.base import is_valid_nuclide_or_elem
 
-logger = logging.getLogger(__name__)
+from tardis.workflows.v_inner_solver import InnerVelocitySolverWorkflow
+from tardis.io.configuration.config_reader import Configuration
 
 
-def write_tardis_csvy(
-    tardis_sample_csvy_path, modify_csvy_headers, df_csv, output_csvy_path
-):
+def run_tardis_from_yml(yml_file_path, spec_output_file, n_threads=1):
+    # read in comfig from yml file
+    config = Configuration.from_yaml(yml_file_path)
+    config.montecarlo.nthreads = n_threads
+
+    # run the v_inner workflow
+    workflow = InnerVelocitySolverWorkflow(
+        config, tau=2.0 / 3, mean_optical_depth="rosseland", csvy=True
+    )
+    workflow.run()
+
+    # save the spectrum
+    # spectrum = workflow.spectrum_solver.spectrum_real_packets # from real packets, faster but noisier
+    spectrum = (
+        workflow.spectrum_solver.spectrum_integrated
+    )  # formal integral, takes longer but less noise
+
+    wavelength = spectrum.wavelength.value[
+        ::-1
+    ]  # in Angstrom , [::-1] to make it in increasing order in wavelength
+    lum_dens = spectrum.luminosity_density_lambda.value[::-1]  # in erg/s/Angstrom/cm^2
+    pd.DataFrame({"wavelength": wavelength, "luminosity_density": lum_dens}).to_csv(
+        spec_output_file, index=False
+    )
+
+
+def write_tardis_csvy(tardis_sample_csvy_path, modify_csvy_headers, df_csv, output_csvy_path):
     """
     Purpose:
     ---------
@@ -48,16 +73,12 @@ def write_tardis_csvy(
     # Convert the csv data to lines
     fields_columns = [field["name"] for field in fields]
     csv_lines = (
-        df_csv[fields_columns]
-        .to_csv(index=False, float_format="%.5e", sep=",")
-        .splitlines()
+        df_csv[fields_columns].to_csv(index=False, float_format="%.5e", sep=",").splitlines()
     )
     csv_lines = [line + "\n" for line in csv_lines]
 
     # Save the updated csvy data
-    updated_csvy_lines = (
-        csvy_lines[: start_index + 1] + yml_lines + ["---\n"] + csv_lines
-    )
+    updated_csvy_lines = csvy_lines[: start_index + 1] + yml_lines + ["---\n"] + csv_lines
     with open(output_csvy_path, "w") as file:
         file.writelines(updated_csvy_lines)
 
