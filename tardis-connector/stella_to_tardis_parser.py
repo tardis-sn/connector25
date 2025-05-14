@@ -27,9 +27,7 @@ TAU_LOWER_LIMIT = (
     False  # False or float, filter out the shells that has tau larger than this value
 )
 SHRINK_SHELL_NUMBER = False  # False or int, if int then end up with this int as total shell numbers that keep the velocity range but lower the grid resolution
-L_NUC_RATIO_UPPER_LIMIT = (
-    0.8  # default 0.8, criteria to determine if the photosphere holds, means L_nuc/L_bol <= 0.8
-)
+L_NUC_RATIO_UPPER_LIMIT = 0.8  # default 0.8, criteria to determine if the photosphere holds, means L_nuc/L_bol <= 0.8
 LOGGING_LEVEL = logging.INFO
 ##########################################
 
@@ -70,7 +68,9 @@ def parse_stella_models_to_tardis_configs(
     # check the stella model files
     stella_output_files = sorted(glob.glob(f"{stella_folder_path}/res/mesa.day*"))
     if len(stella_output_files) == 0:
-        raise FileNotFoundError(f"No stella model files found in {stella_folder_path}/res")
+        raise FileNotFoundError(
+            f"No stella model files found in {stella_folder_path}/res"
+        )
 
     # check the stella mesa.lbol_lnuc.txt file
     L_bol_file = f"{stella_folder_path}/res/mesa.lbol_lnuc.txt"
@@ -91,7 +91,9 @@ def parse_stella_models_to_tardis_configs(
     tardis_sample_config_path = (
         f"{tardis_example_config_folder_path}/tardis_example_config_SESN.yml"
     )
-    tardis_sample_csvy_path = f"{tardis_example_config_folder_path}/tardis_example_csvy.csvy"
+    tardis_sample_csvy_path = (
+        f"{tardis_example_config_folder_path}/tardis_example_csvy.csvy"
+    )
     if not Path(tardis_sample_config_path).exists():
         raise FileNotFoundError(
             f"No tardis example config file found in the folder: {tardis_example_config_folder_path}"

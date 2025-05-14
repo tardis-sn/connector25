@@ -6,7 +6,9 @@ from tardis.util.base import is_valid_nuclide_or_elem
 logger = logging.getLogger(__name__)
 
 
-def write_tardis_csvy(tardis_sample_csvy_path, modify_csvy_headers, df_csv, output_csvy_path):
+def write_tardis_csvy(
+    tardis_sample_csvy_path, modify_csvy_headers, df_csv, output_csvy_path
+):
     """
     Purpose:
     ---------
@@ -53,7 +55,9 @@ def write_tardis_csvy(tardis_sample_csvy_path, modify_csvy_headers, df_csv, outp
     csv_lines = [line + "\n" for line in csv_lines]
 
     # Save the updated csvy data
-    updated_csvy_lines = csvy_lines[: start_index + 1] + yml_lines + ["---\n"] + csv_lines
+    updated_csvy_lines = (
+        csvy_lines[: start_index + 1] + yml_lines + ["---\n"] + csv_lines
+    )
     with open(output_csvy_path, "w") as file:
         file.writelines(updated_csvy_lines)
 
