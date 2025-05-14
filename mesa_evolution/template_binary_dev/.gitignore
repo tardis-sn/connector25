@@ -1,0 +1,15 @@
+*.data
+*.mod
+*.a
+*.o
+*.smod
+*.index
+png/*
+LOGS/*
+LOGS1/*
+LOGS2/*
+star
+binary
+photos/*
+*.txt
+.restart

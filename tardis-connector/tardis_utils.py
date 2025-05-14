@@ -46,7 +46,9 @@ def write_tardis_csvy(tardis_sample_csvy_path, modify_csvy_headers, df_csv, outp
     # Convert the csv data to lines
     fields_columns = [field["name"] for field in fields]
     csv_lines = (
-        df_csv[fields_columns].to_csv(index=False, float_format="%.5e", sep=",").splitlines()
+        df_csv[fields_columns]
+        .to_csv(index=False, float_format="%.5e", sep=",")
+        .splitlines()
     )
     csv_lines = [line + "\n" for line in csv_lines]
 

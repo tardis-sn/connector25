@@ -1,0 +1,85 @@
+#____________LAUNCH_____________
+
+outdir                  = "profiles/13bvn/output"
+
+#___________PROFILE_____________
+
+profile_name 		= "profiles/13bvn/input/3.42Mf_12Mi_vvc_0.0_wnd_0.0_ovr_010_mlt_2.0_z2m2.data.short"
+
+comp_profile_name	= "profiles/13bvn/input/3.42Mf_12Mi_vvc_0.0_wnd_0.0_ovr_010_mlt_2.0_z2m2.data.iso.dat"
+
+#__________EXPLOSION_____________
+
+initial_data 		= "Thermal_Bomb"
+
+#Options:
+#"Piston_Explosion"
+#"Thermal_Bomb"
+
+piston_vel          = 5.0d9
+piston_tstart       = 0.0d0
+piston_tend         = 1.0d-2
+
+final_energy        = 0.3d51
+bomb_tstart         = 0.0d0
+bomb_tend           = 0.1d0
+bomb_mass_spread    = 0.1d0 #(in solar mass)
+bomb_start_point    = 1
+
+#_____________GRID_______________
+
+imax         = 1168  # number of mesh points in input model
+
+gridding = "from_file_by_mass"
+
+#Options:
+#"uniform_in_mass"
+#"from_file_by_mass"
+
+mass_excision = 1
+mass_excised = 1.5 #in solar mass, provided mass_excision = 1
+
+#___________EVOLUTION_____________
+
+radiation = 1
+eoskey = 2
+
+#Options:
+#1 - ideal eos
+#2 - Paczynski
+
+Ni_switch = 1
+Ni_mass = 0.028
+Ni_boundary_mass = 2.9d0
+
+Ni_period = 1.0d4
+
+saha_ncomps = 3
+
+boxcar_smoothing = 1
+
+opacity_floor_envelope = 0.01d0  # stripped progenitor with no H means no envelope
+opacity_floor_core     = 0.01d0  # lower core opacity floor for stripped progenitor
+
+#___________TIMING_______________
+
+ntmax               = 10000000000000
+
+tend                = 17000000.0d0
+
+dtout               = 1.7d4
+dtout_scalar        = 1.7d3
+dtout_check         = 1.7d3
+
+ntout               = -1
+ntout_scalar        = -1
+ntout_check         = -1
+
+ntinfo              = 1000
+
+dtmin               = 1.0d-10
+dtmax               = 1.0d2
+
+#____________TEST_________________
+
+sedov 		    = 0

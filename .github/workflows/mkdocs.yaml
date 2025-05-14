@@ -8,11 +8,17 @@ on:
 
 jobs:
   build:
-    name: Build and Deploy Documentation
+    name: Lint, Build and Deploy Documentation
     runs-on: ubuntu-latest
     steps:
       - name: Checkout main
         uses: actions/checkout@v4
+
+      - name: Lint Markdown
+        uses: DavidAnson/markdownlint-cli2-action@v19
+        continue-on-error: true
+        with:
+          globs: '**/*.md'
 
       - name: Set up Python 3.x
         uses: actions/setup-python@v5

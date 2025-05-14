@@ -1,19 +1,22 @@
 [![Repo Status][status-badge]][status-link]
 [![Docs Status][docs-badge]][docs-link]
+[![Static Analysis Status][static-badge]][static-link]
 [![License][license-badge]][license-link]
 
 [status-link]:         https://www.repostatus.org/#active
 [status-badge]:        https://www.repostatus.org/badges/latest/active.svg
 [docs-link]:           https://tardis-sn.github.io/connector25
 [docs-badge]:          https://github.com/tardis-sn/connector25/actions/workflows/mkdocs.yaml/badge.svg
+[static-link]:         https://github.com/tardis-sn/connector25/actions/workflows/static-analysis.yaml
+[static-badge]:        https://github.com/tardis-sn/connector25/actions/workflows/static-analysis.yaml/badge.svg
 [license-link]:        https://opensource.org/license/apache-2-0
 [license-badge]:       https://img.shields.io/github/license/tardis-sn/connector25
 
 # connector25
 TARDIS Connector 2025 Project
 
-* Evolve a star
-* Strip it of its hydrogen
+* Evolve a (binary) star
+* (Strip it of its hydrogen)
 * Blow it up
 * Calculate spectra and light curves
 * (If time allows, compare to observations and realize we’re wrong!)
@@ -29,6 +32,7 @@ TARDIS Connector 2025 Project
 * [Aldana Grichener](https://github.com/AldanaGrichener)
 * Andrea Antoni
 * [Jared Goldberg](https://github.com/aurimontem)
+* [Mathieu Renzo](https://github.com/mathren)
 * [Matteo Cantiello](https://github.com/matteocantiello)
 
 💥 STIR Explosion
@@ -42,10 +46,16 @@ TARDIS Connector 2025 Project
 * [EB Farag](https://github.com/Debraheem)
 * Yan-Fei Jiang
 
+⚡ [MESA](https://github.com/MESAHub/mesa)/[SNEC](https://stellarcollapse.org/index.php/SNEC.html) Shock Propagation and Lightcurves alternative
+* [Mathieu Renzo](https://github.com/mathren) 📌
+* [Brandon Barker](https://github.com/astrobarker)
+* [Jared Goldberg](https://github.com/aurimontem)
+
+
 🌈 [TARDIS](https://github.com/tardis-sn/tardis) Radiative Transfer
 * [Jing Lu](https://github.com/DeerWhale) 📌
 * [Wolfgang Kerzendorf](https://github.com/wkerzendorf)
-* Anirban Dutta
+* [Anirban Dutta](https://github.com/Knights-Templars)
 * [Josh Shields](https://jvshields.github.io/)
 * [Andrew Fullard](https://github.com/andrewfullard)
 
@@ -65,3 +75,4 @@ TARDIS Connector 2025 Project
 
 * [TARDIS Connector 2025](https://tardis-sn.github.io/connector25/)
 * [2025 workshop website](https://tardis-sn.github.io/tardis-connector/2025)
+* [Overleaf](https://www.overleaf.com/project/67d878020ea15b5c5aa9e3d0)
