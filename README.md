@@ -32,7 +32,6 @@ TARDIS Connector 2025 Project
 * [Aldana Grichener](https://github.com/AldanaGrichener)
 * Andrea Antoni
 * [Jared Goldberg](https://github.com/aurimontem)
-* [Mathieu Renzo](https://github.com/mathren)
 * [Matteo Cantiello](https://github.com/matteocantiello)
 
 💥 STIR Explosion
