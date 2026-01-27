@@ -262,8 +262,6 @@ isolist.append(
 )
 # added in the 11th group cr56, which is traced by MESA with approx26.net
 # flatten the list
-isolist = list(itertools.chain(*isolist))
-
 iso_num = len(isolist)
 
 
