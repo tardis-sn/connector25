@@ -36,6 +36,8 @@ number of mesh points in the `MESA` profile and it produces a file that
 **needs** to be in `SNEC-1.01/tables/GridPattern.dat` (with this specific
 filename).
 
+*N.B.:* The number of mesh points in a MESA profile can be found in
+the header under `num_zones`.
 
 ## The `SNEC` parameter file
 
@@ -46,3 +48,21 @@ For each input `MESA` profile, one needs to hardcode in this file the
 number of mesh points in the input profile in the variable `imax` (same
 number as the input of `grid_setup.py` described above). Possibly opacity
 floors, and thermal bomb or piston properties need to be adjusted too.
+
+## Running SNEC
+
+After creating from the `MESA` profile (at shock breakout) the input
+files for `SNEC`, edit the `parameters` file. Specifically, set:
+
+- `outdir` to a location for the `SNEC` output. This *needs* to exist
+  at the start of the run.
+- `profile_name` to the location of your `*.short` input file
+- `comp_profile_name` to the location of your `*.iso.dat` file
+- `imax` to the maximum number of zones in the model (i.e., one of the
+  input numbers of the script `make_grid.py`)
+- anything else you may want to change in `SNEC`'s setup 
+
+Copy the `grid` file produced above to `SNEC-1.01/tables/GridPattern.dat`.
+
+If everything is in the right place, type `./snec` and see the
+explosion being simulated!
