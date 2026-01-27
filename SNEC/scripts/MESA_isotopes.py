@@ -2,6 +2,7 @@
 
 import sys
 import numpy as np
+import itertools
 
 path = sys.argv[1]  # first argument is the path of the MESA profile we want to convert
 pathout = sys.argv[
@@ -260,8 +261,11 @@ isolist.append(
     ]
 )
 # added in the 11th group cr56, which is traced by MESA with approx26.net
+# flatten the list
+isolist = list(itertools.chain(*isolist))
 
 iso_num = len(isolist)
+
 
 Z = [2, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28]
 A = [4, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56]
