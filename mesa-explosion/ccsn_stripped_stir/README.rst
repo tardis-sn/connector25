@@ -4,7 +4,7 @@
 ccsn_IIp
 ********
 
-This test suite example builds a Type IIp supernova model, including Rayleigh-Taylor Instability mixing, for subsquent use in STELLA.
+This test suite example builds a Type IIp supernova model, including Rayleigh-Taylor Instability mixing, for subsquent use in SNEC.
 
 This test case has 8 parts and ``src/run_star_extras.f90`` is important. Click to see a larger view of a plot.
 
@@ -201,13 +201,13 @@ pgstar commands used for the first 7 plots:
   Grid2_num_cols = 7
   Grid2_num_rows = 8
   Grid2_num_plots = 5
-  
+
   Grid2_win_flag = .true.
   Grid2_win_width = 15
   Grid2_win_aspect_ratio = 0.6
-  
+
   Grid2_file_flag = .true.
-  Grid2_file_dir = 'png' 
+  Grid2_file_dir = 'png'
   Grid2_file_prefix = 'test_'
   Grid2_file_interval = 100
   Grid2_file_width = 15
@@ -333,7 +333,7 @@ pgstar commands used for the 8th plot:
    Grid2_win_flag = .true.
 
   Grid2_file_flag = .true.
-  Grid2_file_dir = 'png' 
+  Grid2_file_dir = 'png'
   Grid2_file_prefix = 'test_'
   Grid2_file_interval = 100
   Grid2_file_width = 15
@@ -344,4 +344,3 @@ pgstar commands used for the 8th plot:
 
 
 Last-Updated: 03Jun2021 (MESA 5be9e57) by fxt
-
