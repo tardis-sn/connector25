@@ -1,0 +1,5 @@
+name: SNEC_Tardis_Connector
+channels:
+  - conda-forge
+dependencies:
+  - numpy=1.26.0
