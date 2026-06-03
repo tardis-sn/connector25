@@ -70,10 +70,10 @@ for i in range(0, len(arr[:, imixing]), 1):  # start reading the the data
         arr[i, imixing] = 0
 
 isolist = []
-isolist.append(["he3", "he4", "h2", "h3", "li6", "li7", "li8", "be7", "be9", "b8"])
-isolist.append(["c11", "c12", "c13", "c14", "n13", "n14", "n15", "b10", "b11"])
-isolist.append(["o15", "o16", "o17", "o18", "f17", "f18", "f19"])
-isolist.append(["ne20", "ne21", "ne22", "ne23", "na21", "na22", "na23", "na24"])
+isolist.append(["he3", "he4", "h2", "h3", "li6", "li7", "li8", "be7", "be9", "b8", "be10"])
+isolist.append(["c11", "c12", "c13", "c14", "n13", "n14", "n15", "n16" , "b10", "b11"])
+isolist.append(["o14", "o15",  "o16", "o17", "o18", "o19", "f17", "f18", "f19", "f20"])
+isolist.append(["ne18", "ne19", "ne20", "ne21", "ne22", "ne23", "na21", "na22", "na23", "na24"])
 isolist.append(["mg23", "mg24", "mg25", "mg26", "mg27", "al25", "al26", "al27", "al28"])
 isolist.append(
     [
@@ -83,6 +83,7 @@ isolist.append(
         "si30",
         "si31",
         "si32",
+        "si33",
         "p29",
         "p30",
         "p31",
@@ -110,6 +111,8 @@ isolist.append(
 )
 isolist.append(
     [
+
+        "ar35",
         "ar36",
         "ar37",
         "ar38",
@@ -122,10 +125,14 @@ isolist.append(
         "k40",
         "k41",
         "k42",
+        "k43",
+        "k44",
     ]
 )
 isolist.append(
     [
+
+        "ca39",
         "ca40",
         "ca41",
         "ca42",
@@ -146,10 +153,13 @@ isolist.append(
         "sc48",
         "sc49",
         "sc50",
+        "sc51",
     ]
 )
 isolist.append(
     [
+
+        "ti43",
         "ti44",
         "ti45",
         "ti46",
@@ -158,6 +168,9 @@ isolist.append(
         "ti49",
         "ti50",
         "ti51",
+        "ti52",
+        "ti53",
+        "ti54",
         "v45",
         "v46",
         "v47",
@@ -166,10 +179,15 @@ isolist.append(
         "v50",
         "v51",
         "v52",
+        "v53",
+        "v54",
+        "v55",
+        "v56",
     ]
 )
 isolist.append(
     [
+        "cr47",
         "cr48",
         "cr49",
         "cr50",
@@ -179,6 +197,8 @@ isolist.append(
         "cr54",
         "cr55",
         "cr56",
+        "cr57",
+        "cr58",
         "mn51",
         "mn52",
         "mn53",
@@ -186,10 +206,13 @@ isolist.append(
         "mn55",
         "mn56",
         "mn57",
+        "mn58",
+        "mn59",
     ]
 )
 isolist.append(
     [
+        "fe51",
         "fe52",
         "fe53",
         "fe54",
@@ -200,6 +223,12 @@ isolist.append(
         "fe59",
         "fe60",
         "fe61",
+        "fe62",
+        "fe63",
+        "fe64",
+        "fe65",
+        "fe66",
+        "co55",
         "co56",
         "co57",
         "co58",
@@ -207,10 +236,16 @@ isolist.append(
         "co60",
         "co61",
         "co62",
+        "co63",
+        "co64",
+        "co65",
+        "co66",
+        "co67",
     ]
 )
 isolist.append(
     [
+        "ni55",
         "ni56",
         "ni57",
         "ni58",
@@ -221,6 +256,9 @@ isolist.append(
         "ni63",
         "ni64",
         "ni65",
+        "ni66",
+        "ni67",
+        "ni68",
         "cu57",
         "cu58",
         "cu59",
@@ -231,6 +269,7 @@ isolist.append(
         "cu64",
         "cu65",
         "cu66",
+        "zn59",
         "zn60",
         "zn61",
         "zn62",
@@ -278,29 +317,29 @@ massfracs_n = 1.0 - massfracs_p - norm
 massnorm = norm/(totalMass)
 print massnorm
 """
-for i in range(
-    len(isolist)
-):  # here we add mass fractions of the isotope groupings together
+for i in range(len(isolist)):
+    # here we add mass fractions of the isotope groupings together
     group = isolist[i]
     temp = []
     groupMassfracs = []
     for isotope in group:
-        if (
-            isotope in columnNames
-        ):  # skip the isotopes MESA doesn't trace (as far as MESA is concerned, they are just not there)
+        if (isotope in columnNames):  # skip the isotopes MESA doesn't trace (as far as MESA is concerned, they are just not there)
             ind = int(columnNames.index(isotope))
             groupMassfracs.append(arr[:, ind])  # at the end of the loop groupMassfracs
             # is a matrix: every line is an isotope, every column a zone
-        groupArr = np.array(groupMassfracs)  # cast it into numbers
-        TgroupArr = groupArr.T  # .T means transpose: we get a matrix in which each column is for an isotope and each row for a zone
+    groupArr = np.array(groupMassfracs)  # cast it into numbers
+    TgroupArr = groupArr.T  # .T means transpose: we get a matrix in which each column is for an isotope and each row for a zone
     # we have a matrix for each group
     zonesum = []
     for j in range(0, zones):
         zonesum.append(sum(TgroupArr[j, :]))
-        temp.append(
-            zonesum[j]
-        )  # no need to normalize with MESA (judging from the output values orders of magnitude)
+        temp.append(zonesum[j])  # no need to normalize with MESA (judging from the output values orders of magnitude)
     massfracsShort.append(temp)
+
+# Sanity check for abundances summing to 1
+# checksum = np.array(massfracsShort) #
+# sum_test = checksum.sum(axis=0) + arr[:, iprot] + arr[:, ineut]
+# print(sum_test)
 
 # OUTPUT
 outfile = open(pathout, "w")
