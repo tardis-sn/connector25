@@ -15,11 +15,11 @@ The script `mesa_to_GR1D.py` takes a `MESA` profile and converts it to a
 path of the input profile and output file (including filenames) are
 command line arguments for this script.
 
-The script `MESA_isotopes.py` script will generate from the input `MESA`
-profile the file for the composition input of `SNEC`. Once again the
-paths of the input and output files (including filenames) are command
-line arguments. For untested nuclear networks, the script may need
-adjustments, but it should work with many networks out-of-the-box.
+The script `MESA_isotopes.py` script will generate from the input
+`MESA` profile the file for the composition input of `SNEC`. Once
+again the paths of the input and output files (including filenames)
+are command line arguments. The script should work with `approx21.net`
+and `mesa206.net` but may need adjustments for other nets.
 
 For convenience, the script `short_and_iso.py` is a wrapper that will
 run both the scripts described above, where the only argument is the

@@ -4,10 +4,10 @@ import sys
 import numpy as np
 import itertools
 
-path = sys.argv[1]  # first argument is the path of the MESA profile we want to convert
-pathout = sys.argv[
-    2
-]  # second argument is the path where to save the output (must include the extension)
+# first argument is the path of the MESA profile we want to convert
+path = sys.argv[1]
+# second argument is the path where to save the output (must include the extension)
+pathout = sys.argv[2]
 
 msun = 1.99e33
 rsun = 6.96e10
@@ -326,24 +326,26 @@ for i in range(len(isolist)):
         if (isotope in columnNames):  # skip the isotopes MESA doesn't trace (as far as MESA is concerned, they are just not there)
             ind = int(columnNames.index(isotope))
             groupMassfracs.append(arr[:, ind])  # at the end of the loop groupMassfracs
-            # is a matrix: every line is an isotope, every column a zone
+                                                # is a matrix: every line is an isotope,
+                                                # every column a zone
     groupArr = np.array(groupMassfracs)  # cast it into numbers
     TgroupArr = groupArr.T  # .T means transpose: we get a matrix in which each column is for an isotope and each row for a zone
-    # we have a matrix for each group
     zonesum = []
     for j in range(0, zones):
         zonesum.append(sum(TgroupArr[j, :]))
-        temp.append(zonesum[j])  # no need to normalize with MESA (judging from the output values orders of magnitude)
-    massfracsShort.append(temp)
+        temp.append(zonesum[j])
+        massfracsShort.append(temp)
 
-# Sanity check for abundances summing to 1
-# checksum = np.array(massfracsShort) #
-# sum_test = checksum.sum(axis=0) + arr[:, iprot] + arr[:, ineut]
-# print(sum_test)
+massfracsShort = np.array(massfracsShort, dtype=float)
+total = arr[:, iprot]+arr[:, ineut] + massfracsShort.sum(axis=0)
+massfracsShort = massfracsShort/total
+# print(np.shape(massfracsShort), min(massfracsShort.sum(axis=0)), max(massfracsShort.sum(axis=0)))
+
 
 # OUTPUT
 outfile = open(pathout, "w")
 
+# header --------------------------------
 outfile.write(
     str(zones) + "\t" + str(iso_num + 2) + "\n"
 )  # this is the first line of the output file, with numbers of zones and isotopes
@@ -356,13 +358,13 @@ outfile.write(
     "0.0d0 1.0d0 2.0d0 6.0d0 8.0d0 10.0d0 12.0d0 14.0d0 16.0d0 18.0d0 20.0d0 22.0d0 24.0d0 26.0d0 28.0d0 \n"
 )  # values of Z for each isotope
 
+# content -------------------------------
 # MESA stores the output in reverse order with respect to KEPLER
 for i in range(zones, 0, -1):
+    print(i)
     writeNewLine = "%15.6E" % (arr[i - 1, imass] * msun)  # mass in grams
     writeNewLine += "%15.6E" % (arr[i - 1, iradius] * rsun)  # radius in cm
-    writeNewLine += (
-        "%15.6E" % (arr[i - 1, ineut])
-    )  # abundance of neutrons as MESA gives it
+    writeNewLine += ("%15.6E" % (max(1e-40, arr[i - 1, ineut])))  # abundance of neutrons as MESA gives it
     writeNewLine += "%15.6E" % (
         max(1e-40, arr[i - 1, iprot])  # floor H to small value for stripped stars
     )  # abundance of h1 (no protons from photodisintegration)
