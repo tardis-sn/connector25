@@ -241,24 +241,6 @@ isolist.append(
         "co65",
         "co66",
         "co67",
-    ]
-)
-isolist.append(
-    [
-        "ni55",
-        "ni56",
-        "ni57",
-        "ni58",
-        "ni59",
-        "ni60",
-        "ni61",
-        "ni62",
-        "ni63",
-        "ni64",
-        "ni65",
-        "ni66",
-        "ni67",
-        "ni68",
         "cu57",
         "cu58",
         "cu59",
@@ -296,9 +278,29 @@ isolist.append(
         "ge68",
         "ge69",
         "ge70",
-        "ge71",
+        "ge71"
     ]
 )
+# Reserved for nickel
+isolist.append(
+    [
+        "ni55",
+        "ni56",
+        "ni57",
+        "ni58",
+        "ni59",
+        "ni60",
+        "ni61",
+        "ni62",
+        "ni63",
+        "ni64",
+        "ni65",
+        "ni66",
+        "ni67",
+        "ni68",
+]
+    )
+
 # added in the 11th group cr56, which is traced by MESA with approx26.net
 # flatten the list
 iso_num = len(isolist)

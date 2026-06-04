@@ -10,16 +10,24 @@ fractions of all isotopes included, `mixing_type`, and optionally `omega`.
 
 The scripts to generate input models are in `./scripts`
 
-The script `mesa_to_GR1D.py` takes a `MESA` profile and converts it to a
-`*.short` format, which is the input format for both [GR1D](https://github.com/evanoconnor/GR1D) and `SNEC`. The
-path of the input profile and output file (including filenames) are
-command line arguments for this script.
+The script `mesa_to_GR1D.py` takes a `MESA` profile and converts it to
+a `*.short` format, which is the input format for both
+[GR1D](https://github.com/evanoconnor/GR1D) and `SNEC`. The path of
+the input profile and output file (including filenames) are command
+line arguments for this script.
 
 The script `MESA_isotopes.py` script will generate from the input
-`MESA` profile the file for the composition input of `SNEC`. Once
-again the paths of the input and output files (including filenames)
-are command line arguments. The script should work with `approx21.net`
-and `mesa206.net` but may need adjustments for other nets.
+`MESA` profile the file for the composition input of `SNEC`, by
+grouping isotopes together in 15 specific groups. Once again, the
+paths of the input and output files (including filenames) are command
+line arguments. The script should work with `approx21.net` and
+`mesa206.net` but may need adjustments for other nuclear reaction
+networks in `MESA`.
+
+*N.B.:* Nickel needs to be logged in a separate (Z,A) pair in
+`isolist`, and `SNEC` will pick it up. We decide to lump all isotopes
+of Nickel together here. Heavier isotopes are assigned to the previous
+group of elements.
 
 For convenience, the script `short_and_iso.py` is a wrapper that will
 run both the scripts described above, where the only argument is the
