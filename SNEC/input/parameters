@@ -36,8 +36,8 @@ gridding = "from_file_by_mass"
 #"uniform_in_mass"
 #"from_file_by_mass"
 
-mass_excision = 0
-mass_excised = 1.5 #in solar mass, provided mass_excision = 1
+mass_excision = 1
+mass_excised = 2.0d0 #in solar mass, provided mass_excision = 1
 
 #___________EVOLUTION_____________
 
@@ -48,7 +48,7 @@ eoskey = 2
 #1 - ideal eos
 #2 - Paczynski
 
-Ni_switch = 0
+Ni_switch = 0              # 0 = no nickel heating, 1 = apply total mass within Ni_boundary_mass (will be smoothed by boxcar)
 Ni_mass = 0.0d0 # 0.028
 Ni_boundary_mass = 2.9d0
 
@@ -56,7 +56,7 @@ Ni_period = 1.0d4
 
 saha_ncomps = 3
 
-boxcar_smoothing = 0
+boxcar_smoothing = 0  # No boxcar smoothing is passing a model from mesa-explode
 
 opacity_floor_envelope = 0.01d0  # stripped progenitor with no H means no envelope
 opacity_floor_core     = 0.01d0  # lower core opacity floor for stripped progenitor
