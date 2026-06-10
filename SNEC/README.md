@@ -21,13 +21,12 @@ The script `MESA_isotopes.py` script will generate from the input
 grouping isotopes together in 15 specific groups. Once again, the
 paths of the input and output files (including filenames) are command
 line arguments. The script should work with `approx21.net` and
-`mesa206.net` but may need adjustments for other nuclear reaction
+`mesa_206.net` but may need adjustments for other nuclear reaction
 networks in `MESA`.
 
-*N.B.:* Nickel needs to be logged in a separate (Z,A) pair in
-`isolist`, and `SNEC` will pick it up. We decide to lump all isotopes
-of Nickel together here. Heavier isotopes are assigned to the previous
-group of elements.
+*N.B.:* `ni56` needs to be logged in a separate (Z,A) pair in
+`isolist`, and `SNEC` will pick it up. All other isotopes are assigned
+to the previous group of elements.
 
 For convenience, the script `short_and_iso.py` is a wrapper that will
 run both the scripts described above, where the only argument is the

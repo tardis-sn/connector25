@@ -279,13 +279,8 @@ isolist.append(
         "ge69",
         "ge70",
         "ge71"
-    ]
-)
-# Reserved for nickel
-isolist.append(
-    [
+        # other nickel iso also go here
         "ni55",
-        "ni56",
         "ni57",
         "ni58",
         "ni59",
@@ -298,13 +293,17 @@ isolist.append(
         "ni66",
         "ni67",
         "ni68",
-]
+    ]
+)
+# Reserved for radioactive nickel56 -- SNEC will read this
+isolist.append(
+    [
+        "ni56",
+    ]
     )
 
-# added in the 11th group cr56, which is traced by MESA with approx26.net
 # flatten the list
 iso_num = len(isolist)
-
 
 Z = [2, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28]
 A = [4, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56]
@@ -363,7 +362,6 @@ outfile.write(
 # content -------------------------------
 # MESA stores the output in reverse order with respect to KEPLER
 for i in range(zones, 0, -1):
-    print(i)
     writeNewLine = "%15.6E" % (arr[i - 1, imass] * msun)  # mass in grams
     writeNewLine += "%15.6E" % (arr[i - 1, iradius] * rsun)  # radius in cm
     writeNewLine += ("%15.6E" % (max(1e-40, arr[i - 1, ineut])))  # abundance of neutrons as MESA gives it

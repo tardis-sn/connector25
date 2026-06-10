@@ -13,7 +13,7 @@ def plot_v_r(mass_file, velocity_file):
 
     fig, ax = plt.subplots()
     for i, t in enumerate(times):
-        if i < 917: continue
+        if i < len(times)-1: continue
         # ax.plot(data[t][:, 0]/2e33, data[t][:, 1]/1e8)
         ax.plot(data_r[t][:, 0], data[t][:, 1]/1e8)
     # ax.set_xlabel(r"mass coordinate [$M_{\odot}$]")
@@ -28,7 +28,7 @@ def plot_v_m(velocity_file):
     times = np.array(list(data.keys())) # in sec
     fig, ax = plt.subplots()
     for i, t in enumerate(times):
-        if i < 917: continue
+        if i < len(times)-1: continue
         ax.plot(data[t][:, 0]/2e33, data[t][:, 1]/1e8)
     ax.set_xlabel(r"mass coordinate [$M_{\odot}$]")
     ax.set_ylabel(r"velocity [km/s]")
@@ -52,6 +52,6 @@ def plot_LC(obs_lum, ax=None, **kwargs):
 
 if __name__ == "__main__":
     root = "../output/large_net/"
-    # plot_v_r(root+"mass.xg", root+"vel.xg")
-    # plot_v_m(root+"vel.xg")
+    plot_v_r(root+"mass.xg", root+"vel.xg")
+    plot_v_m(root+"vel.xg")
     L, t = plot_LC(root+"lum_photo.dat")
