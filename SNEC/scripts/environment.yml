@@ -3,4 +3,6 @@ channels:
   - conda-forge
 dependencies:
   - numpy=1.26.0
+  - h5py
+  - jupyter=1.0.0
   - matplotlib=3.10.0

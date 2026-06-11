@@ -1,12 +1,16 @@
 #____________LAUNCH_____________
 
-outdir                  = "/home/mrenzo/Documents/Research/Projects/TARDIS_connector_2025/SNEC/output/large_net/"
+outdir                  = "./output/large_net/"
 
 #___________PROFILE_____________
 
 profile_name 		= "/home/mrenzo/Documents/Research/Projects/TARDIS_connector_2025/SNEC/input/last_profile.data.short"
 
 comp_profile_name	= "/home/mrenzo/Documents/Research/Projects/TARDIS_connector_2025/SNEC/input/last_profile.data.iso.dat"
+
+## for SNEC+fb  # "" #  leave empty for default behavior
+grid_pattern_name       = "/home/mrenzo/Documents/Research/Projects/TARDIS_connector_2025/SNEC/input/GridPattern.dat"
+
 
 #__________EXPLOSION_____________
 
@@ -20,10 +24,10 @@ initial_data 		= "Thermal_Bomb"
 # piston_tstart		= 0.0d0
 # piston_tend		= 1.0d-2
 
-bomb_mode		= 2
-final_energy		= 0.0d51         # do not inject energy
+bomb_mode		= 2             # do not subtract binding energy from bomb
+final_energy		= 0.0d40        # do not inject energy
 bomb_tstart		= 0.0d0
-bomb_tend		= 0.1d0
+bomb_tend		= 0.1d-8
 bomb_mass_spread	= 0.1d0          # (in solar mass)
 bomb_start_point	= 1
 
@@ -31,14 +35,14 @@ bomb_start_point	= 1
 
 imax			= 1265           # number of mesh points in input model
 
-gridding		= "from_file_by_mass"
+gridding		= "from_file_by_mass" # "uniform_in_mass" #
 
 #Options:
 #"uniform_in_mass"
 #"from_file_by_mass"
 
 mass_excision		= 0              # no mass excision
-mass_excised		= 0.0d0		 # in solar mass, provided mass_excision = 1
+mass_excised		= 0.0d0          # in solar mass, provided mass_excision = 1
 
 #___________EVOLUTION_____________
 
@@ -65,9 +69,11 @@ opacity_floor_core	= 0.01d0         # lower core opacity floor for stripped prog
 
 #___________TIMING_______________
 
-ntmax			= 10000000000000
+ntmax			= 100000000000
 
-tend			= 17000000.0d0
+tend			= 8640000.0d0
+
+max_t_dense_out         = 0.0d0 # denser output until this
 
 dtout			= 1.7d4
 dtout_scalar		= 1.7d3
@@ -85,3 +91,10 @@ dtmax			= 1.0d2
 #____________TEST_________________
 
 sedov			= 0
+
+## for SNEC+fb
+
+#___________Inner boundary_________
+# Options: "inflow" or empty string
+
+innerBC                = "inflow"

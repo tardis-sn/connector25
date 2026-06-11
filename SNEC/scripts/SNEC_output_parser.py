@@ -2,6 +2,7 @@ import os
 import numpy as np
 import re
 import sys
+import h5py
 
 
 def SNEC_output_parser(outfile, cache=True):
@@ -62,3 +63,58 @@ def SNEC_output_parser(outfile, cache=True):
         np.savez(cache_file, **{str(k): v for k, v in data_dict.items()})
 
     return data_dict
+
+
+# For hdf5 output below
+def read_SNEC_hdf5(filename):
+    """
+    Parse a SNEC HDF5 output file into a flat dictionary.
+    Parameters
+    ----------
+    filename : str
+        Path to output.h5
+
+    Returns
+    -------
+    dict
+        Keys are field/scalar names (e.g. 'fields/rho', 'scalars/lum_observed').
+        Values are numpy arrays:
+          - 1-D arrays of length imax for fields (modeflag=1 snapshots)
+          - 1-D arrays of length n_timesteps for scalars (modeflag=2 time series)
+        The root 'time' scalar (last written simulation time) is included as 'time'.
+    """
+    data = {}
+
+    with h5py.File(filename, "r") as f:
+        _recurse(f, "", data)
+
+    return data
+
+
+def _recurse(node, prefix, data):
+    """Walk the HDF5 tree and collect all datasets into data."""
+    for key in node.keys():
+        item = node[key]
+        path = f"{prefix}/{key}".lstrip("/")
+        if isinstance(item, h5py.Dataset):
+            arr = item[()]
+            # squeeze length-1 dims (e.g. the root 'time' scalar stored as shape (1,))
+            if arr.shape == (1,):
+                arr = arr[0]
+            data[path] = arr
+        elif isinstance(item, h5py.Group):
+            _recurse(item, path, data)
+
+
+
+if __name__ == "__main__":
+    filename = sys.argv[1] if len(sys.argv) > 1 else "output.h5"
+
+    data = read_snec_hdf5(filename)
+
+    print(f"Read {len(data)} entries from {filename}\n")
+    print(f"{'Key':<40}  {'Shape':<20}  {'Dtype'}")
+    print("-" * 70)
+    for key, val in sorted(data.items()):
+        val = np.atleast_1d(val)
+        print(f"{key:<40}  {str(val.shape):<20}  {val.dtype}")
